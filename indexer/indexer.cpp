@@ -5,6 +5,7 @@
 #include <map>
 #include <vector>
 #include <cctype>
+#include "mappy.h"
 
 namespace fs = std::filesystem;
 
