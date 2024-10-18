@@ -1,6 +1,8 @@
 #include <iostream> 
 using namespace std; 
 
+#include "structures/triey.cpp"
+
 void printGarth() {
     cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n";
     cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n";
@@ -72,14 +74,18 @@ void printGarth() {
 // Driver Code 
 int main() 
 { 
-    printGarth();       
+    //printGarth();      put garth back in after testing
     cout << "\nWelcome to Search the Dark\n";
     cout << "The one stop shop to find all Garth Marenghi's Books\n";
     cout << "Please enter the name of the book you are looking for: \n";
     //make search index
     //make trie
     string searchStr = "";
-    string books_temp[10] = {"The Oeuvre", "Black Fang", "Catacombs of the Damned", "Afterbirth", "Arachnobilia", "The Diary of Anne Frankenstein"};
+    string books_temp[10] = {"theoeuvre", "blackfang", "catacombsofthedamned", "afterbirth", "arachnobilia", "thediaryofannefrankenstein"};
+
+    Triey bookTriey = Triey();
+    bookTriey.populateTriey(books_temp);
+    bookTriey.print();
     while (searchStr != "exit") {
 
         cin >> searchStr;
