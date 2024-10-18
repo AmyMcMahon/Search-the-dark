@@ -1,161 +1,45 @@
 #include <iostream>
+#include <vector>
 using namespace std;
+
+struct DocCount
+{
+    std::string docName;
+    int count;
+};
+
+struct WordData
+{
+    int count;                  // Total count of the word
+    vector<DocCount> docCounts; // List of document counts
+};
 
 class Mappy
 {
-private:
-    const int search(int first) const
-    {
-        const Mappy *temp = root;
-        while (temp != nullptr && temp->first != first)
-        {
-            if (first < temp->first)
-                temp = temp->left;
-            else
-                temp = temp->right;
-        }
-        if (temp != nullptr)
-        {
-            return temp->second;
-        }
-        return 0;
-    }
+public:
+    Mappy *root;
+    Mappy *left;
+    Mappy *right;
+    Mappy *par;
+    std::string first; // word
+    WordData second;   // Count and document counts
+    int depth;
 
-    Mappy *create(int first)
+    // Method to create a new node
+    Mappy *create(const char *first, std::string docName)
     {
         Mappy *newNode = new Mappy();
         newNode->first = first;
-        newNode->second = 0;
+        newNode->second.count = 1;
+        newNode->second.docCounts.push_back({docName, 1});
         newNode->left = nullptr;
         newNode->right = nullptr;
         newNode->par = nullptr;
         newNode->depth = 1;
-
         return newNode;
     }
 
-    void rightRotate(Mappy *x)
-    {
-        Mappy *y = x->left;
-        x->left = y->right;
-        if (y->right != nullptr)
-        {
-            y->right->par = x;
-        }
-        if (x->par != nullptr && x->par->right == x)
-        {
-            x->par->right = y;
-        }
-        else if (x->par != nullptr && x->par->left == x)
-        {
-            x->par->left = y;
-        }
-        y->par = x->par;
-        y->right = x;
-        x->par = y;
-    }
-
-    void leftRotate(Mappy *x)
-    {
-        Mappy *y = x->right;
-        x->right = y->left;
-        if (y->left != nullptr)
-        {
-            y->left->par = x;
-        }
-        if (x->par != nullptr && x->par->right == x)
-        {
-            x->par->right = y;
-        }
-        else if (x->par != nullptr && x->par->left == x)
-        {
-            x->par->left = y;
-        }
-        y->par = x->par;
-        y->left = x;
-        x->par = y;
-    }
-
-    void helpy(Mappy *x)
-    {
-        // LL rotation
-        if (depthy(x->right) - depthy(x->left) < -1)
-        {
-            if (depthy(x->left->left) > depthy(x->left->right))
-            {
-                x->depth = max(depthy(x->right) + 1, depthy(x->left->right) + 1);
-                x->left->depth = max(depthy(x->left->left) + 1, depthy(x) + 1);
-                rightRotate(x);
-            }
-            else
-            {
-                x->left->depth = max(depthy(x->left->left) + 1, depthy(x->left->right->left) + 1);
-                x->depth = max(depthy(x->right) + 1, depthy(x->left->right->right) + 1);
-                x->left->right->depth = max(depthy(x) + 1, depthy(x->left) + 1);
-                leftRotate(x->left);
-                rightRotate(x);
-            }
-        }
-        // RR rotation
-        else if (depthy(x->right) - depthy(x->left) > 1)
-        {
-            if (depthy(x->right->right) > depthy(x->right->left))
-            {
-                x->depth = max(depthy(x->left) + 1, depthy(x->right->left) + 1);
-                x->right->depth = max(depthy(x->right->right) + 1, depthy(x) + 1);
-                leftRotate(x);
-            }
-            else
-            {
-                x->right->depth = max(depthy(x->right->right) + 1, depthy(x->right->left->right) + 1);
-                x->depth = max(depthy(x->left) + 1, depthy(x->right->left->left) + 1);
-                x->right->left->depth = max(depthy(x) + 1, depthy(x->right) + 1);
-                rightRotate(x->right);
-                leftRotate(x);
-            }
-        }
-    }
-
-    void balance(Mappy *node)
-    {
-        while (node != root)
-        {
-            int d = node->depth;
-            node = node->par;
-            if (node->depth < d + 1)
-            {
-                node->depth = d + 1;
-            }
-            if (node == root && depthy(node->left) - depthy(node->right) > 1)
-            {
-                if (depthy(node->left->left) > depthy(node->left->right))
-                {
-                    root = node->left;
-                }
-                else
-                {
-                    root = node->left->right;
-                }
-                helpy(node);
-                break;
-            }
-            else if (node == root && depthy(node->left) - depthy(node->right) < -1)
-            {
-                if (depthy(node->right->right) > depthy(node->right->left))
-                {
-                    root = node->right;
-                }
-                else
-                {
-                    root = node->right->left;
-                }
-                helpy(node);
-                break;
-            }
-            helpy(node);
-        }
-    }
-
+    // Get the depth of a node
     int depthy(Mappy *node)
     {
         if (node == nullptr)
@@ -163,60 +47,176 @@ private:
         return node->depth;
     }
 
-    Mappy *insert(int first)
+    void balance(Mappy *node)
     {
-        Mappy *newnode = create(first);
+        while (node != nullptr)
+        {
+            int balanceFactor = depthy(node->right) - depthy(node->left);
 
+            if (balanceFactor < -1)
+            {
+                if (depthy(node->left->left) >= depthy(node->left->right))
+                {
+                    rightRotate(node); // LL Case
+                }
+                else
+                {
+                    leftRotate(node->left); // LR Case
+                    rightRotate(node);      // Final rotation
+                }
+            }
+            else if (balanceFactor > 1)
+            {
+                if (depthy(node->right->right) >= depthy(node->right->left))
+                {
+                    leftRotate(node); // RR Case
+                }
+                else
+                {
+                    rightRotate(node->right); // RL Case
+                    leftRotate(node);         // Final rotation
+                }
+            }
+
+            // Update depth
+            node->depth = max(depthy(node->left), depthy(node->right)) + 1;
+
+            // Move up to the parent node
+            node = node->par;
+        }
+    }
+
+    void rightRotate(Mappy *x)
+    {
+        Mappy *y = x->left;
+        x->left = y->right;
+
+        if (y->right != nullptr)
+        {
+            y->right->par = x;
+        }
+
+        y->par = x->par;
+
+        if (x->par == nullptr)
+        {
+            root = y; // y becomes root
+        }
+        else if (x == x->par->right)
+        {
+            x->par->right = y;
+        }
+        else
+        {
+            x->par->left = y;
+        }
+
+        y->right = x;
+        x->par = y;
+
+        // Update depth
+        x->depth = max(depthy(x->left), depthy(x->right)) + 1;
+        y->depth = max(depthy(y->left), depthy(y->right)) + 1;
+    }
+
+    void leftRotate(Mappy *x)
+    {
+        Mappy *y = x->right;
+        x->right = y->left;
+
+        if (y->left != nullptr)
+        {
+            y->left->par = x;
+        }
+
+        y->par = x->par;
+
+        if (x->par == nullptr)
+        {
+            root = y; // y becomes root
+        }
+        else if (x == x->par->left)
+        {
+            x->par->left = y;
+        }
+        else
+        {
+            x->par->right = y;
+        }
+
+        y->left = x;
+        x->par = y;
+
+        // Update depth
+        x->depth = max(depthy(x->left), depthy(x->right)) + 1;
+        y->depth = max(depthy(y->left), depthy(y->right)) + 1;
+    }
+
+    // Insert or update the count for a word
+    Mappy *insert(const char *first, const std::string &docName)
+    {
+        Mappy *newNode = create(first, docName);
         if (root == nullptr)
         {
-            root = newnode;
+            root = newNode;
             return root;
         }
         Mappy *temp = root, *prev = nullptr;
+
         while (temp != nullptr)
         {
             prev = temp;
-            if (first < temp->first)
+            if (newNode->first < temp->first)
             {
                 temp = temp->left;
             }
-            else if (first > temp->first)
+            else if (newNode->first > temp->first)
             {
                 temp = temp->right;
             }
             else
             {
-                free(newnode);
+                // Word already exists, update the count and document list
+                temp->second.count++;
+                bool docExists = false;
+                for (auto &docCount : temp->second.docCounts)
+                {
+                    if (docCount.docName == docName)
+                    {
+                        docCount.count++;
+                        docExists = true;
+                        break;
+                    }
+                }
+                if (!docExists)
+                {
+                    temp->second.docCounts.push_back({docName, 1});
+                }
+                delete newNode; // Free allocated memory for newNode
                 return temp;
             }
         }
-        if (first < prev->first)
+
+        if (newNode->first < prev->first)
         {
-            prev->left = newnode;
+            prev->left = newNode;
         }
         else
         {
-            prev->right = newnode;
+            prev->right = newNode;
         }
-        newnode->par = prev;
+        newNode->par = prev;
 
-        balance(newnode);
+        // Balance the tree after insertion
+        balance(newNode);
 
-        return newnode;
+        return newNode;
     }
 
-public:
-    static class Mappy *root;
-    static int cnt;
+    Mappy() : root(nullptr) {}
 
-    Mappy *left, *right, *par;
-    int first, second, depth;
-
-    int &operator[](int key) { return insert(key)->second; }
-    const int operator[](int key) const
+    void addWord(const char *word, std::string docName)
     {
-        return search(key);
+        insert(word, docName);
     }
 };
-
-Mappy *Mappy::root = nullptr;

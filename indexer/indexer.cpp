@@ -2,31 +2,24 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <map>
-#include <vector>
+
 #include <cctype>
 #include "mappy.h"
 
 namespace fs = std::filesystem;
 
-struct Doccy
-{
-    std::string doccy_name;
-    int count;
+// struct Doccy {
+//     std::string doccy_name;
+//     int count;
 
-    Doccy(std::string name, int count)
-    {
-        this->doccy_name = name;
-        this->count = count;
-    }
+//     Doccy(std::string name, int count) : doccy_name(name), count(count) {}
+//     Doccy() : doccy_name(""), count(0) {}
+// };
 
-    Doccy() : doccy_name(""), count(0) {}
-};
-
-class indexer
+class Indexer
 {
 public:
-    void addFiley(const std::string &name, std::map<std::string, std::pair<int, std::vector<Doccy>>> &index)
+    void addFiley(const std::string &name, Mappy &index)
     {
         std::ifstream file(name);
 
@@ -36,14 +29,12 @@ public:
             return;
         }
 
-        std::map<std::string, int> docWordCount;
         std::string word;
         while (file >> word)
         {
-
+            // Convert to lowercase and remove punctuation
             for (int i = 0, len = word.size(); i < len; i++)
             {
-                // check whether parsing character is punctuation or not
                 word[i] = tolower(word[i]);
                 if (ispunct(word[i]))
                 {
@@ -51,32 +42,16 @@ public:
                     len = word.size();
                 }
             }
-            docWordCount[word]++;
-        }
-
-        for (const auto &pair : docWordCount)
-        {
-            const std::string &word = pair.first;
-            int docCount = pair.second;
-
-            if (index.find(word) == index.end())
-            {
-                index[word].first = docCount;
-                index[word].second.push_back(Doccy(name, docCount));
-            }
-            else
-            {
-                index[word].first += docCount;
-                index[word].second.push_back(Doccy(name, docCount));
-            }
+            // Insert the word into the index with the document ID
+            index.addWord(word.c_str(), name.c_str());
         }
 
         file.close();
     }
 
-    void toCsv(const std::map<std::string, std::pair<int, std::vector<Doccy>>> &index)
+    void toCsv(Mappy &index)
     {
-        std::ofstream file("index.csv");
+        std::ofstream file("indexT.csv");
 
         if (!file.is_open())
         {
@@ -84,29 +59,39 @@ public:
             return;
         }
 
-        for (const auto &pair : index)
-        {
-            const std::string &word = pair.first;
-            const std::pair<int, std::vector<Doccy>> &info = pair.second;
-
-            file << word << "," << info.first << ",";
-
-            for (const Doccy &doc : info.second)
-            {
-                file << doc.doccy_name << "," << doc.count << "\t";
-            }
-
-            file << std::endl;
-        }
+        // Assuming you implement a method to traverse the Mappy tree
+        // and collect the word data for CSV output
+        collectData(index.root, file);
 
         file.close();
+    }
+
+private:
+    // Helper function to recursively collect data from Mappy and write to file
+    void collectData(Mappy *node, std::ofstream &file)
+    {
+        if (node == nullptr)
+            return;
+
+        // In-order traversal
+        collectData(node->left, file);
+
+        // Write the word and its data to the file
+        file << node->first << "," << node->second.count << ",";
+        for (const DocCount &docCount : node->second.docCounts)
+        {
+            file << docCount.docName << "," << docCount.count << "\t";
+        }
+        file << std::endl;
+
+        collectData(node->right, file);
     }
 };
 
 int main()
 {
-    indexer idx;
-    std::map<std::string, std::pair<int, std::vector<Doccy>>> index;
+    Indexer idx;
+    Mappy index; // Use Mappy instead of std::map
     std::string path = "./books";
 
     for (const auto &entry : fs::directory_iterator(path))
