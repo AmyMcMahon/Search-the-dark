@@ -71,7 +71,8 @@ class Triey{
 
     }
 
-     vector<string> rank(vector<pair<string, int> >& all_matches) {
+    vector<string> rank(vector<pair<string, int> >& all_matches) {
+        //make better sorting
         sort(all_matches.begin(), all_matches.end(), [](const pair<string, int>& a, const pair<string, int>& b) {
             return a.second > b.second;  // Sort by popularity, highest first
         });
