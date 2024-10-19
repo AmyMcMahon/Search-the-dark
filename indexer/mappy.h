@@ -1,5 +1,5 @@
 #include <iostream>
-#include <vector>
+#include "vector.h"
 using namespace std;
 
 struct DocCount
@@ -10,8 +10,8 @@ struct DocCount
 
 struct WordData
 {
-    int count;                  // Total count of the word
-    vector<DocCount> docCounts; // List of document counts
+    int count;                   // Total count of the word
+    Vectory<DocCount> docCounts; // List of document counts
 };
 
 class Mappy
