@@ -2,7 +2,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-
 #include <cctype>
 #include "mappy.h"
 
@@ -11,6 +10,7 @@ namespace fs = std::filesystem;
 class Indexer
 {
 public:
+    // Function to add words from a file to the index
     void addFiley(const std::string &name, Mappy &index)
     {
         std::ifstream file(name);
@@ -41,10 +41,10 @@ public:
         file.close();
     }
 
+    // Function to export the index to CSV files
     void toCsv(Mappy &index)
     {
-        // We will dynamically open files based on the first letter of the word
-        collectData(index.root);
+        collectData(index.root); // Collect data from the index and write to CSV
     }
 
 private:
@@ -57,13 +57,11 @@ private:
         // In-order traversal to maintain order in the CSVs
         collectData(node->left);
 
-        // Determine the first letter of the word
         if (!node->first.empty())
         {
             char firstLetter = tolower(node->first[0]);
             std::string fileName = "./index/" + std::string(1, firstLetter) + ".csv";
 
-            // Open the respective CSV file in append mode
             std::ofstream file(fileName, std::ios::app);
 
             if (!file.is_open())
@@ -93,11 +91,13 @@ int main()
     Mappy index;
     std::string path = "./books";
 
+    // Iterate through files in the specified directory and add them to the index
     for (const auto &entry : fs::directory_iterator(path))
     {
         idx.addFiley(entry.path().string(), index);
     }
 
+    // Export the index to CSV files
     idx.toCsv(index);
 
     return 0;
