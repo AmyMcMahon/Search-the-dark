@@ -41,6 +41,36 @@ public:
         file.close();
     }
 
+    void removeFile(const std::string &name, Mappy &index)
+    {
+        std::ifstream file(name);
+
+        if (!file.is_open())
+        {
+            std::cerr << "Error opening the file!" << std::endl;
+            return;
+        }
+
+        std::string word;
+        while (file >> word)
+        {
+            // Convert to lowercase and remove punctuation
+            for (int i = 0, len = word.size(); i < len; i++)
+            {
+                word[i] = tolower(word[i]);
+                if (ispunct(word[i]))
+                {
+                    word.erase(i--, 1);
+                    len = word.size();
+                }
+            }
+            // Remove the word from the index with the document ID
+            index.removeWord(word.c_str(), name.c_str());
+        }
+
+        file.close();
+    }
+
     // Function to export the index to CSV files
     void toCsv(Mappy &index)
     {
