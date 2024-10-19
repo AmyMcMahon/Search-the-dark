@@ -87,7 +87,7 @@ class Triey{
     void lookForWords(Nodey* current, string input, vector<pair<string, int>> & all_matches){
         //to make into vector or smt (linked list??)
         cout << "input: " << input << endl;
-        cout << "looking for : " << current << endl;
+       // cout << "looking for : " << current << endl;
         if (current->endofWord == true){
             all_matches.push_back({input, current->popularity}); 
         }
@@ -95,9 +95,7 @@ class Triey{
         for (int i = 0; i < 26; i++){
         if (current->childrens[i]) {
             char child = 'a' + i;
-            cout << "child: " << child << endl;
-            current = current->childrens[i];
-            lookForWords(current,
+            lookForWords(current->childrens[i],
                            input + child, all_matches);
         }
         }
