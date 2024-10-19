@@ -86,6 +86,11 @@ int main()
     Triey bookTriey = Triey();
     bookTriey.populateTriey(books_temp);
     bookTriey.print();
+    cout << "starting search is working?" << endl;
+
+    vector<string> results = bookTriey.search("the");
+    cout << "results: " << results[0] << "," << results[1] << endl;
+
     while (searchStr != "exit") {
 
         cin >> searchStr;
