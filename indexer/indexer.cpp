@@ -8,14 +8,6 @@
 
 namespace fs = std::filesystem;
 
-// struct Doccy {
-//     std::string doccy_name;
-//     int count;
-
-//     Doccy(std::string name, int count) : doccy_name(name), count(count) {}
-//     Doccy() : doccy_name(""), count(0) {}
-// };
-
 class Indexer
 {
 public:
@@ -51,47 +43,54 @@ public:
 
     void toCsv(Mappy &index)
     {
-        std::ofstream file("indexT.csv");
-
-        if (!file.is_open())
-        {
-            std::cerr << "Error opening the file!" << std::endl;
-            return;
-        }
-
-        // Assuming you implement a method to traverse the Mappy tree
-        // and collect the word data for CSV output
-        collectData(index.root, file);
-
-        file.close();
+        // We will dynamically open files based on the first letter of the word
+        collectData(index.root);
     }
 
 private:
-    // Helper function to recursively collect data from Mappy and write to file
-    void collectData(Mappy *node, std::ofstream &file)
+    // Helper function to recursively collect data from Mappy and write to respective CSV files
+    void collectData(Mappy *node)
     {
         if (node == nullptr)
             return;
 
-        // In-order traversal
-        collectData(node->left, file);
+        // In-order traversal to maintain order in the CSVs
+        collectData(node->left);
 
-        // Write the word and its data to the file
-        file << node->first << "," << node->second.count << ",";
-        for (const DocCount &docCount : node->second.docCounts)
+        // Determine the first letter of the word
+        if (!node->first.empty())
         {
-            file << docCount.docName << "," << docCount.count << "\t";
-        }
-        file << std::endl;
+            char firstLetter = tolower(node->first[0]);
+            std::string fileName = "./index/" + std::string(1, firstLetter) + ".csv";
 
-        collectData(node->right, file);
+            // Open the respective CSV file in append mode
+            std::ofstream file(fileName, std::ios::app);
+
+            if (!file.is_open())
+            {
+                std::cerr << "Error opening the file: " << fileName << std::endl;
+                return;
+            }
+
+            // Write the word, its total count, and document counts to the file
+            file << node->first << "," << node->second.count << ",";
+            for (const DocCount &docCount : node->second.docCounts)
+            {
+                file << docCount.docName << "," << docCount.count << "\t";
+            }
+            file << std::endl;
+
+            file.close(); // Close the file after writing the data
+        }
+
+        collectData(node->right);
     }
 };
 
 int main()
 {
     Indexer idx;
-    Mappy index; // Use Mappy instead of std::map
+    Mappy index;
     std::string path = "./books";
 
     for (const auto &entry : fs::directory_iterator(path))
