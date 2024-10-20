@@ -94,38 +94,44 @@ int main()
 
     while (searchStr != "exit") {
 
-        cin >> searchStr;
+        getline(cin, searchStr);
         if (searchStr == "exit"){
             break;
         }
         vector<string> words = inputy.break_input(searchStr);
+
+        cout << "Words: " << words.size() << endl;
 
         if (words.size() == 1) {
             vector<string> results = bookTriey.search(searchStr);
             string search_term = inputy.autocomplete(results);
         }else if (words.size() == 2) {
             if (words[0] == "NOT") {
-                vector<string> results = bookTriey.search(words[1]);
-                string search_term = inputy.autocomplete(results);
-                //run search for NOT
+                bool results_not = bookTriey.lookForWord(words[0]);
+                if (results_not) {
+                    cout << "Word found\n";
+                    //run search for NOT
+                }else{
+                    cout << "Word not found\n";
+                }
             }else{
                 cout << "Invalid search term\n";
                 break;
             }
         }else if (words.size() == 3) {
             if (words[1] == "AND") {
-                bool results1 = bookTriey.lookForWord(words[0]);
-                bool results1 = bookTriey.lookForWord(words[2]);
-                if (results1 && results1) {
+                bool results_and1 = bookTriey.lookForWord(words[0]);
+                bool results_and2 = bookTriey.lookForWord(words[2]);
+                if (results_and1 && results_and2) {
                     cout << "Both words found\n";
                     //run search for AND
                 }else{
                     cout << "One or both words not found\n";
                 }
             }else if (words[1] == "OR") {
-                bool results1 = bookTriey.lookForWord(words[0]);
-                bool results1 = bookTriey.lookForWord(words[2]);
-                if (results1 && results1) {
+                bool results_or1 = bookTriey.lookForWord(words[0]);
+                bool results_or2 = bookTriey.lookForWord(words[2]);
+                if (results_or1 && results_or2) {
                     cout << "Both words found\n";
                     //run search for or
                 }else{
@@ -142,9 +148,6 @@ int main()
             break;
         }
 
-        for (int i = 0; i < words.size(); i++) {
-            cout << words[i] << endl;
-        }
         //vector<string> results = bookTriey.search(searchStr);
         //string books[10] = trie.search(searchStr);
         //string search_term = autocomplete(results);
