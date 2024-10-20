@@ -39,7 +39,6 @@ Vectory<string> Triey::search(string input){
     //    return only_word;
     //}
     Vectory<pair<string, int> > all_matches;
-    cout << "input: " << input << endl;
     lookForWords(current, input, all_matches);
     top_matches = rank(all_matches);
     //traverse rest of trie for works?
@@ -61,7 +60,6 @@ Vectory<string> Triey::rank(Vectory<pair<string, int> >& all_matches) {
 
 void Triey::lookForWords(Nodey* current, string input, Vectory<pair<string, int> > & all_matches){
     //to make into vector or smt (linked list??)
-    cout << "input: " << input << endl;
    // cout << "looking for : " << current << endl;
     if (current->endofWord == true){
         all_matches.push_back({input, current->popularity}); 

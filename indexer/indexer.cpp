@@ -91,7 +91,7 @@ private:
         if (!node->first.empty())
         {
             char firstLetter = tolower(node->first[0]);
-            std::string fileName = "./index/" + std::string(1, firstLetter) + ".csv";
+            std::string fileName = "../index/" + std::string(1, firstLetter) + ".csv";
 
             std::ofstream file(fileName, std::ios::app);
 
@@ -120,7 +120,7 @@ int main()
 {
     Indexer idx;
     Mappy index;
-    std::string path = "./books";
+    std::string path = "../books";
 
     // Iterate through files in the specified directory and add them to the index
     for (const auto &entry : fs::directory_iterator(path))

@@ -98,7 +98,7 @@ int main()
             break;
         }
         Vectory<string> words = inputy.break_input(searchStr);
-
+ 
         cout << "Words: " << words.size() << endl;
 
         if (words.size() == 1) {
