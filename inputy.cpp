@@ -41,18 +41,5 @@ public:
         return words;
     }
 
-    vector<string> and_search(vector<string> results1, vector<string> results2){
-        vector<string> and_results;
-        for (int i = 0; i < results1.size(); i++) {
-            for (int j = 0; j < results2.size(); j++) {
-                if (results1[i] == results2[j]) {
-                    and_results.push_back(results1[i]);
-                }
-            }
-        }
-        return and_results;
-    }
-
-
 
 };
