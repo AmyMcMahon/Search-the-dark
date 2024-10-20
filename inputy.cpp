@@ -1,13 +1,13 @@
 #include <iostream>
 #include <string>
-#include <vector>
+#include "structures/vectory.h"
 using namespace std;
 
 class Inputy {
 public:
     Inputy(){};
     
-    string autocomplete(vector<string> words){
+    string autocomplete(Vectory<string> &words){
         cout << "Is this what you meant? \n";
 
         for (int i = 0; i < words.size(); i++) {
@@ -25,8 +25,8 @@ public:
         return words[bookNum-1];
     }
 
-    vector<string> break_input(string input){
-        vector<string> words;
+    Vectory<string> break_input(string input){
+        Vectory<string> words;
         string word = "";
         cout << input;
         for (int i = 0; i < input.size(); i++) {
