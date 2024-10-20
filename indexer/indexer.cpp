@@ -3,7 +3,7 @@
 #include <fstream>
 #include <string>
 #include <cctype>
-#include "mappy.h"
+#include "../structures/mappy.h"
 
 namespace fs = std::filesystem;
 
