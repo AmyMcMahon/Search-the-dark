@@ -18,6 +18,8 @@ public:
     T &operator[](size_t index);
     T *begin();
     T *end();
+    Vectory(Vectory&& other) noexcept; 
+    Vectory& operator=(Vectory&& other) noexcept;
 };
 
 template <typename T> Vectory<T>::Vectory()
@@ -83,5 +85,25 @@ template <typename T> T &Vectory<T>::operator[](size_t index)
 template <typename T> T *Vectory<T>::begin() { return arry; }
 template <typename T> T *Vectory<T>::end() { return arry + current; }
 
+template <typename T> Vectory<T>::Vectory(Vectory&& other) noexcept 
+    : arry(other.arry), cappy(other.cappy), current(other.current) {
+    other.arry = nullptr; // Leave other in a valid state
+    other.cappy = 0;
+    other.current = 0;
+}
+
+// Move assignment operator
+template <typename T> Vectory<T>& Vectory<T>::operator=(Vectory&& other) noexcept {
+    if (this != &other) { // Self-assignment check
+        delete[] arry; // Free existing resource
+        arry = other.arry;
+        cappy = other.cappy;
+        current = other.current;
+        other.arry = nullptr; // Leave other in a valid state
+        other.cappy = 0;
+        other.current = 0;
+    }
+    return *this;
+}
 
 #endif // VECTORY_H

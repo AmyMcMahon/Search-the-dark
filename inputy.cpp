@@ -7,7 +7,7 @@ class Inputy {
 public:
     Inputy(){};
     
-    string autocomplete(Vectory<string> words){
+    string autocomplete(Vectory<string> &words){
         cout << "Is this what you meant? \n";
 
         for (int i = 0; i < words.size(); i++) {
