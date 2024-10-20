@@ -3,7 +3,8 @@ using namespace std;
 
 #include "structures/triey.h"
 #include "structures/vectory.h"
-#include "inputy.cpp"
+#include "tools/inputy.h"
+#include "tools/indexy.h"
 
 void printGarth() {
     cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n";
@@ -89,6 +90,7 @@ int main()
     bookTriey.populateTriey(books_temp);
     bookTriey.print();
 
+    Indexy idx;
     Inputy inputy = Inputy();
 
     while (searchStr != "exit") {

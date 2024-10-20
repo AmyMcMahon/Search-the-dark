@@ -1,3 +1,5 @@
+#ifndef MAPPY_H  
+#define MAPPY_H  
 #include <iostream>
 #include "vectory.h"
 using namespace std;
@@ -44,3 +46,5 @@ public:
     void addWord(const char *word, std::string docName);
     void removeWord(const char *word, std::string docName);
 };
+
+#endif

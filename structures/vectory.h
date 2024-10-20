@@ -18,8 +18,13 @@ public:
     T &operator[](size_t index);
     T *begin();
     T *end();
+    T *begin() const;  
+    T *end() const;  
     Vectory(Vectory&& other) noexcept; 
     Vectory& operator=(Vectory&& other) noexcept;
+
+    Vectory(const Vectory& other);         
+    Vectory& operator=(const Vectory& other); 
 };
 
 template <typename T> Vectory<T>::Vectory()
@@ -85,6 +90,16 @@ template <typename T> T &Vectory<T>::operator[](size_t index)
 template <typename T> T *Vectory<T>::begin() { return arry; }
 template <typename T> T *Vectory<T>::end() { return arry + current; }
 
+template <typename T>
+T *Vectory<T>::begin() const {
+    return arry;
+}
+
+template <typename T>
+T *Vectory<T>::end() const {
+    return arry + current;
+}
+
 template <typename T> Vectory<T>::Vectory(Vectory&& other) noexcept 
     : arry(other.arry), cappy(other.cappy), current(other.current) {
     other.arry = nullptr; // Leave other in a valid state
@@ -106,4 +121,29 @@ template <typename T> Vectory<T>& Vectory<T>::operator=(Vectory&& other) noexcep
     return *this;
 }
 
+// Copy constructor
+template <typename T>
+Vectory<T>::Vectory(const Vectory& other)
+    : arry(new T[other.cappy]), cappy(other.cappy), current(other.current) {
+    for (int i = 0; i < current; ++i) {
+        arry[i] = other.arry[i];  // Deep copy each element
+    }
+}
+
+// Copy assignment operator
+template <typename T>
+Vectory<T>& Vectory<T>::operator=(const Vectory& other) {
+    if (this != &other) {  // Self-assignment check
+        delete[] arry;     // Free existing memory
+
+        // Allocate new memory and copy
+        arry = new T[other.cappy];
+        cappy = other.cappy;
+        current = other.current;
+        for (int i = 0; i < current; ++i) {
+            arry[i] = other.arry[i];
+        }
+    }
+    return *this;
+}
 #endif // VECTORY_H
