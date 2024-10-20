@@ -77,6 +77,22 @@ public:
         collectData(index.root); // Collect data from the index and write to CSV
     }
 
+    void createIndex()
+    {
+        Indexer idx;
+        Mappy index;
+        std::string path = "./books";
+
+        // Iterate through files in the specified directory and add them to the index
+        for (const auto &entry : fs::directory_iterator(path))
+        {
+            idx.addFiley(entry.path().string(), index);
+        }
+
+        // Export the index to CSV files
+        idx.toCsv(index);
+    }
+
 private:
     // Helper function to recursively collect data from Mappy and write to respective CSV files
     void collectData(Mappy *node)
@@ -91,7 +107,6 @@ private:
         {
             char firstLetter = tolower(node->first[0]);
             std::string fileName = "./index/" + std::string(1, firstLetter) + ".csv";
-
             std::ofstream file(fileName, std::ios::app);
 
             if (!file.is_open())
@@ -114,21 +129,3 @@ private:
         collectData(node->right);
     }
 };
-
-int main()
-{
-    Indexer idx;
-    Mappy index;
-    std::string path = "./books";
-
-    // Iterate through files in the specified directory and add them to the index
-    for (const auto &entry : fs::directory_iterator(path))
-    {
-        idx.addFiley(entry.path().string(), index);
-    }
-
-    // Export the index to CSV files
-    idx.toCsv(index);
-
-    return 0;
-}
