@@ -41,6 +41,30 @@ public:
         current++;
     }
 
+    void erase(int index)
+    {
+        if (index < 0 || index >= current)
+        {
+            throw std::out_of_range("Index out of range");
+        }
+
+        for (int i = index; i < current - 1; i++)
+        {
+            arry[i] = arry[i + 1];
+        }
+        current--;
+    }
+
+    int size()
+    {
+        return current;
+    }
+
+    bool empty()
+    {
+        return size() == 0;
+    }
+
     T &operator[](size_t index)
     {
         if (index >= current)

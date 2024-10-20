@@ -152,6 +152,118 @@ public:
         y->depth = max(depthy(y->left), depthy(y->right)) + 1;
     }
 
+    Mappy *remove(const char *word, const std::string &docName)
+    {
+        Mappy *temp = root;
+        while (temp != nullptr)
+        {
+            if (std::string(word) < temp->first)
+            {
+                temp = temp->left;
+            }
+            else if (std::string(word) > temp->first)
+            {
+                temp = temp->right;
+            }
+            else
+            {
+                // Word found, look for the document
+                bool docFound = false;
+                for (auto it = temp->second.docCounts.begin(); it != temp->second.docCounts.end(); ++it)
+                {
+                    if (it->docName == docName)
+                    {
+                        // Reduce the count of this word from this document
+                        temp->second.count -= it->count;
+
+                        // Erase the document entry
+                        int index = it - temp->second.docCounts.begin(); // Calculate the index
+                        temp->second.docCounts.erase(index);
+                        docFound = true;
+                        break;
+                    }
+                }
+
+                if (!docFound)
+                {
+                    std::cerr << "Document not found!" << std::endl;
+                    return nullptr; // Document not found
+                }
+
+                // If the word has no more occurrences, remove the word
+                if (temp->second.docCounts.empty())
+                {
+                    Mappy *parent = removeNode(temp);
+                    balance(parent);
+                    return parent;
+                }
+                return temp;
+            }
+        }
+        std::cerr << "Word not found!" << std::endl;
+        return nullptr; // Word not found
+    }
+
+    Mappy *removeNode(Mappy *node)
+    {
+        if (node->left == nullptr && node->right == nullptr)
+        {
+            // No children
+            if (node->par == nullptr)
+            {
+                root = nullptr; // Removing root node
+            }
+            else if (node == node->par->left)
+            {
+                node->par->left = nullptr;
+            }
+            else
+            {
+                node->par->right = nullptr;
+            }
+            Mappy *parent = node->par;
+            delete node;
+            return parent;
+        }
+        else if (node->left == nullptr || node->right == nullptr)
+        {
+            // One child
+            Mappy *child = (node->left != nullptr) ? node->left : node->right;
+            if (node->par == nullptr)
+            {
+                root = child; // Node is root, update root
+            }
+            else if (node == node->par->left)
+            {
+                node->par->left = child;
+            }
+            else
+            {
+                node->par->right = child;
+            }
+            child->par = node->par;
+            Mappy *parent = node->par;
+            delete node;
+            return parent;
+        }
+        else
+        {
+            // Two children, find in-order successor (smallest in right subtree)
+            Mappy *successor = node->right;
+            while (successor->left != nullptr)
+            {
+                successor = successor->left;
+            }
+            // Copy successor's data to node
+            node->first = successor->first;
+            node->second = successor->second;
+            // Delete the successor node
+            Mappy *parent = removeNode(successor);
+            balance(parent);
+            return parent;
+        }
+    }
+
     // Insert or update the count for a word
     Mappy *insert(const char *first, const std::string &docName)
     {
@@ -218,5 +330,10 @@ public:
     void addWord(const char *word, std::string docName)
     {
         insert(word, docName);
+    }
+
+    void removeWord(const char *word, std::string docName)
+    {
+        remove(word, docName);
     }
 };
