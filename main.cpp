@@ -1,7 +1,8 @@
 #include <iostream> 
 using namespace std; 
 
-#include "structures/triey.cpp"
+#include "structures/triey.h"
+#include "structures/vectory.h"
 #include "inputy.cpp"
 
 void printGarth() {
@@ -98,12 +99,12 @@ int main()
         if (searchStr == "exit"){
             break;
         }
-        vector<string> words = inputy.break_input(searchStr);
+        Vectory<string> words = inputy.break_input(searchStr);
 
         cout << "Words: " << words.size() << endl;
 
         if (words.size() == 1) {
-            vector<string> results = bookTriey.search(searchStr);
+            Vectory<string> results = bookTriey.search(searchStr);
             string search_term = inputy.autocomplete(results);
         }else if (words.size() == 2) {
             if (words[0] == "NOT") {

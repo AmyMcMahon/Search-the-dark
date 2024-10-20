@@ -3,7 +3,8 @@
 #include <fstream>
 #include <string>
 #include <cctype>
-#include "mappy.h"
+#include "../structures/mappy.h"
+#include "../structures/vectory.h"
 
 namespace fs = std::filesystem;
 
