@@ -76,4 +76,7 @@ public:
 
     T *begin() { return arry; }
     T *end() { return arry + current; }
+
+    const T *begin() const { return arry; }
+    const T *end() const { return arry + current; }
 };

@@ -47,6 +47,7 @@ public:
         return node->depth;
     }
 
+    // Balance the AVL tree
     void balance(Mappy *node)
     {
         while (node != nullptr)
@@ -78,14 +79,12 @@ public:
                 }
             }
 
-            // Update depth
             node->depth = max(depthy(node->left), depthy(node->right)) + 1;
-
-            // Move up to the parent node
             node = node->par;
         }
     }
 
+    // Right rotate the AVL tree
     void rightRotate(Mappy *x)
     {
         Mappy *y = x->left;
@@ -114,11 +113,11 @@ public:
         y->right = x;
         x->par = y;
 
-        // Update depth
         x->depth = max(depthy(x->left), depthy(x->right)) + 1;
         y->depth = max(depthy(y->left), depthy(y->right)) + 1;
     }
 
+    // Left rotate the AVL tree
     void leftRotate(Mappy *x)
     {
         Mappy *y = x->right;
@@ -133,7 +132,7 @@ public:
 
         if (x->par == nullptr)
         {
-            root = y; // y becomes root
+            root = y;
         }
         else if (x == x->par->left)
         {
@@ -147,11 +146,11 @@ public:
         y->left = x;
         x->par = y;
 
-        // Update depth
         x->depth = max(depthy(x->left), depthy(x->right)) + 1;
         y->depth = max(depthy(y->left), depthy(y->right)) + 1;
     }
 
+    // Remove a document from the index
     Mappy *remove(const char *word, const std::string &docName)
     {
         Mappy *temp = root;
@@ -173,11 +172,9 @@ public:
                 {
                     if (it->docName == docName)
                     {
-                        // Reduce the count of this word from this document
+                        // Reduce overall count and remove document
                         temp->second.count -= it->count;
-
-                        // Erase the document entry
-                        int index = it - temp->second.docCounts.begin(); // Calculate the index
+                        int index = it - temp->second.docCounts.begin();
                         temp->second.docCounts.erase(index);
                         docFound = true;
                         break;
@@ -187,7 +184,7 @@ public:
                 if (!docFound)
                 {
                     std::cerr << "Document not found!" << std::endl;
-                    return nullptr; // Document not found
+                    return nullptr;
                 }
 
                 // If the word has no more occurrences, remove the word
@@ -201,7 +198,7 @@ public:
             }
         }
         std::cerr << "Word not found!" << std::endl;
-        return nullptr; // Word not found
+        return nullptr;
     }
 
     Mappy *removeNode(Mappy *node)
@@ -211,7 +208,7 @@ public:
             // No children
             if (node->par == nullptr)
             {
-                root = nullptr; // Removing root node
+                root = nullptr;
             }
             else if (node == node->par->left)
             {
@@ -264,7 +261,7 @@ public:
         }
     }
 
-    // Insert or update the count for a word
+    // Insert document
     Mappy *insert(const char *first, const std::string &docName)
     {
         Mappy *newNode = create(first, docName);
@@ -304,7 +301,7 @@ public:
                 {
                     temp->second.docCounts.push_back({docName, 1});
                 }
-                delete newNode; // Free allocated memory for newNode
+                delete newNode;
                 return temp;
             }
         }
@@ -321,7 +318,6 @@ public:
 
         // Balance the tree after insertion
         balance(newNode);
-
         return newNode;
     }
 
