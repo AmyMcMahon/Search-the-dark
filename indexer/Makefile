@@ -1,8 +1,8 @@
 CC = g++
-CFLAGS = -Wall -std=c++11 -g
-STRUCT = ./structures
-OBJS = indexer.o mappy.o vectory.o
-TARGET = main
+CFLAGS = -Wall -std=c++17 -g
+STRUCT = ../structures
+OBJS = indexer.o mappy.o
+TARGET = indexer
 
 $(TARGET): $(OBJS)
 	$(CC) $(OBJS) -o $(TARGET)
@@ -10,11 +10,8 @@ $(TARGET): $(OBJS)
 indexer.o: indexer.cpp
 	$(CC) $(CFLAGS) -c indexer.cpp
 
-mappy.o: $(STRUCT)/mappy.h
-	$(CC) $(CFLAGS) -c $(STRUCT)/mappy.h
-
-vectory.o: vectory.h
-	$(CC) $(CFLAGS) -c vectory.h
+mappy.o: $(STRUCT)/mappy.cpp
+	$(CC) $(CFLAGS) -c $(STRUCT)/mappy.cpp
 
 clean:
 	rm -f $(OBJS) $(TARGET)

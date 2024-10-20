@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -Wall -std=c++11 -g
+CFLAGS = -Wall -std=c++17 -g
 STRUCT = structures
 OBJS = main.o triey.o inputy.o
 TARGET = main

@@ -4,6 +4,7 @@
 #include <string>
 #include <cctype>
 #include "../structures/mappy.h"
+#include "../structures/vectory.h"
 
 namespace fs = std::filesystem;
 
