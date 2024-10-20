@@ -1,29 +1,30 @@
-A cover document detailing:
-- The contributions by each group member as an itemised list and estimated percentage of the total.
-- Number of Git commits and LoC per group member (forreferenceandasasmoketest,notforuseasanabsolutemetric).
-- Ashortdescriptionofyouranalysisofyourproject,i.e.BigOnotationandbriefjustificationforyourdesigndecisions.
-- References,sourcesandAIusageexplanations(whererelevant).
+# Search the Dark - Report
 
-## Group
+## Group Members
+| Name | Student ID |
+| --- | --- |
+| Dervla Gargan | 22346279 |
+| Amy McMahon | 22_____ |
 
-* Dervla Gargan - 22346279
-* Amy McMahon - 22346619
+## Contributions
+| Feaure | Contributior | Percentage |
+| --- | --- | --- |
+| | | |
 
-## Contributions (add % of total work)
+## Git Commits
+| Name | Commits | LoC |
+| --- | --- | --- |
+| Dervla Gargan | | |
+| Amy McMahon | | |
 
-* Dervla:
-    * Trie
-    * Search Syntax
-    * CLI
-    * Added vactor methods
-
-* Amy:
-    * Inverted Index
-    * Map
-    * Vector
-
-## Git commits and LoC
+**Note:** Amy's github is broken
 
 ## Analysis
+- Big O Notation
+- Justification for design decisions
 
-## References 
+## References
+- Sources
+### AI Usage Explanations
+We used chatgpt to generate the books we used for indexing. 
+We used chat gpt for debugging code

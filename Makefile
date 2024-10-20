@@ -1,8 +1,6 @@
-# Compiler and flags
 CC = g++
-CFLAGS = -Wall -std=c++11 -g
+CFLAGS = -Wall -std=c++17 -g
 STRUCT = structures
-SRCS = main.cpp $(STRUCT)/triey.cpp
 OBJS = main.o triey.o inputy.o
 TARGET = main
 
