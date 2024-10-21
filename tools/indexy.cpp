@@ -1,11 +1,5 @@
 #include "indexy.h"
 
-struct trieData
-{
-    std::string word;
-    int count;
-}
-
 Indexy::Indexy(){};
 
 void Indexy::addFiley(const std::string &name, Mappy &index)
@@ -170,9 +164,9 @@ void Indexy::collectData(Mappy *node)
     collectData(node->right);
 }
 
-Vector<trieData> readFileTrie(char *word)
+Vectory<trieData> Indexy::readFileTrie(char word)
 {
-    char firstLetter = tolower(word[0]);
+    char firstLetter = tolower(word);
     std::string fileName = "./index/" + std::string(1, firstLetter) + ".csv";
     std::ifstream file(fileName);
     if (!file.is_open())

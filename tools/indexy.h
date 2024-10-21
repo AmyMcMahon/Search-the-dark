@@ -1,3 +1,6 @@
+#ifndef INDEXY_H  
+#define INDEXY_H 
+
 #include <filesystem>
 #include <iostream>
 #include <fstream>
@@ -16,6 +19,12 @@ struct Result
     int relevance;
 };
 
+struct trieData
+{
+    std::string word;
+    int count;
+};
+
 class Indexy
 {
 public:
@@ -25,9 +34,11 @@ public:
     void toCsv(Mappy &index);
     void createIndex();
     Vectory<Result> getBooks(const std::string &searchStr);
-    Vector<trieData> readFileTrie(char *word);
+    Vectory<trieData> readFileTrie(char word);
 
 private:
     Vectory<Result> sortResultsByRelevance(const Vectory<DocCount> &books);
     void collectData(Mappy *node);
 };
+
+#endif

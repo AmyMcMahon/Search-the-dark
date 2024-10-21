@@ -87,7 +87,6 @@ int main()
     string books_temp[10] = {"theoeuvre", "blackfang", "catacombsofthedamned", "afterbirth", "arachnobilia", "thediaryofannefrankenstein"};
 
     Triey bookTriey = Triey();
-    bookTriey.populateTriey(books_temp);
     bookTriey.print();
 
     Indexy idx;
@@ -104,8 +103,9 @@ int main()
         cout << "Words: " << words.size() << endl;
 
         if (words.size() == 1) {
-            Vectory<TrieData> words = idx.readFileTreiy(searchStr[0]);
+            Vectory<trieData> words = idx.readFileTrie(searchStr[0]);
             bookTriey.populateTriey(words);
+            bookTriey.print();
             Vectory<string> results = bookTriey.search(searchStr);
             string search_term = inputy.autocomplete(results);
         }else if (words.size() == 2) {
