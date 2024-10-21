@@ -4,9 +4,9 @@ Triey::Triey(){
     root = new Nodey();
 }
 
-void Triey::populateTriey(string books_temp[10]){
-    for(int j = 0; j < 10; j++){
-        string word = books_temp[j];
+void Triey::populateTriey(Vectory<TrieData> words){
+    for(int j = 0; j < words.size(); j++){
+        string word = words[j];
         Nodey* current = root;
         for(int i = 0; i < word.size(); i++){
             int index = word[i] - 'a';

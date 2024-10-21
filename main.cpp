@@ -104,6 +104,8 @@ int main()
         cout << "Words: " << words.size() << endl;
 
         if (words.size() == 1) {
+            Vectory<TrieData> words = idx.readFileTreiy(searchStr[0]);
+            bookTriey.populateTriey(words);
             Vectory<string> results = bookTriey.search(searchStr);
             string search_term = inputy.autocomplete(results);
         }else if (words.size() == 2) {

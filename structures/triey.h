@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "vectory.h"
+#include "indexy.h"
 using namespace std;
 
 class Nodey{
@@ -20,7 +21,7 @@ class Triey{
     Nodey* root;
 
     Triey();
-    void populateTriey(string books_temp[10]);
+    void populateTriey(Vectory<TrieData> words);
     Vectory<string> search(string input);
     Vectory<string> rank(Vectory<pair<string, int> >& all_matches);
     void lookForWords(Nodey* current, string input, Vectory<pair<string, int> > & all_matches);
