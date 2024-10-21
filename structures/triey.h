@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <list>
 #include "vectory.h"
 using namespace std;
 

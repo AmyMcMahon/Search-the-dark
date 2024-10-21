@@ -63,16 +63,15 @@ void Indexy::toCsv(Mappy &index)
 
 void Indexy::createIndex()
 {
-    Indexy idx;
     Mappy index;
     std::string path = "./books";
     // Iterate through files in the specified directory and add them to the index
     for (const auto &entry : fs::directory_iterator(path))
     {
-        idx.addFiley(entry.path().string(), index);
+        addFiley(entry.path().string(), index);
     }
     // Export the index to CSV files
-    idx.toCsv(index);
+    toCsv(index);
 }
 
 Vectory<Result> Indexy::getBooks(const std::string &searchStr)
