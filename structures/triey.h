@@ -2,11 +2,13 @@
 #include <string>
 #include "vectory.h"
 #include "../tools/indexy.h"
+#include <algorithm>
 using namespace std;
 
-class Nodey{
+class Nodey
+{
 public:
-    Nodey* childrens[26];
+    Nodey *childrens[26];
     bool endofWord;
     int popularity;
 
@@ -16,17 +18,17 @@ public:
     }
 };
 
-class Triey{
-    public:
-    Nodey* root;
+class Triey
+{
+public:
+    Nodey *root;
 
     Triey();
     void populateTriey(Vectory<trieData> words);
     Vectory<string> search(string input);
-    Vectory<string> rank(Vectory<pair<string, int> >& all_matches);
-    void lookForWords(Nodey* current, string input, Vectory<pair<string, int> > & all_matches);
+    Vectory<string> rank(Vectory<pair<string, int>> &all_matches);
+    void lookForWords(Nodey *current, string input, Vectory<pair<string, int>> &all_matches);
     bool lookForWord(string word);
-    void print(Nodey* node, string prefix) const;
+    void print(Nodey *node, string prefix) const;
     void print() const;
-
 };

@@ -1,8 +1,9 @@
-#ifndef INDEXY_H  
-#define INDEXY_H 
+#ifndef INDEXY_H
+#define INDEXY_H
 
 #include <filesystem>
 #include <iostream>
+#include <algorithm>
 #include <fstream>
 #include <sstream>
 #include <string>
