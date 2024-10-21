@@ -276,6 +276,7 @@ void Mappy::addWord(const char *word, std::string docName)
 {
     insert(word, docName);
 }
+
 void Mappy::removeWord(const char *word, std::string docName)
 {
     remove(word, docName);

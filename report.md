@@ -28,4 +28,3 @@
 ### AI Usage Explanations
 We used chatgpt to generate the books we used for indexing. 
 We used chat gpt for debugging code
->>>>>>> 6ad0413a9d2c8a6a86fb0dc50197bf42510b0c0d
