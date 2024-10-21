@@ -92,25 +92,39 @@ int main()
     Indexy idx;
     Inputy inputy = Inputy();
 
-    while (searchStr != "exit") {
+    Vectory<trieData> words_index;
 
+    while (searchStr != "exit") {
+        searchStr = "";
         getline(cin, searchStr);
         if (searchStr == "exit"){
             break;
         }
+
         Vectory<string> words = inputy.break_input(searchStr);
- 
         cout << "Words: " << words.size() << endl;
 
         if (words.size() == 1) {
-            Vectory<trieData> words = idx.readFileTrie(searchStr[0]);
-            bookTriey.populateTriey(words);
+            //populates trie with words from file with starting letter
+            words_index = idx.readFileTrie(searchStr[0]);
+            bookTriey.populateTriey(words_index);
             bookTriey.print();
             Vectory<string> results = bookTriey.search(searchStr);
             string search_term = inputy.autocomplete(results);
+
+            cout << "You are searching for: " << search_term << endl;
+
+            Vectory<Result> books = idx.getBooks(search_term);
+            string bookPath = inputy.chooseBook(books);
+            cout << "You have selected: " << bookPath << endl;
+
+
         }else if (words.size() == 2) {
             if (words[0] == "NOT") {
-                bool results_not = bookTriey.lookForWord(words[0]);
+                words_index = idx.readFileTrie(words[1][0]);
+                bookTriey.populateTriey(words_index);
+
+                bool results_not = bookTriey.lookForWord(words[1]);
                 if (results_not) {
                     cout << "Word found\n";
                     //run search for NOT
@@ -123,8 +137,14 @@ int main()
             }
         }else if (words.size() == 3) {
             if (words[1] == "AND") {
+                words_index = idx.readFileTrie(words[0][0]);
+                bookTriey.populateTriey(words_index);
                 bool results_and1 = bookTriey.lookForWord(words[0]);
+
+                words_index = idx.readFileTrie(words[2][0]);
+                bookTriey.populateTriey(words_index);
                 bool results_and2 = bookTriey.lookForWord(words[2]);
+
                 if (results_and1 && results_and2) {
                     cout << "Both words found\n";
                     //run search for AND
@@ -146,7 +166,7 @@ int main()
             }
         }else{
             cout << "Invalid search term" << endl;
-            cout << "Format: word1 \n NOT word1 \n word1 OR/AND word2" << endl;
+            cout << "Format: \n word1 \n NOT word1 \n word1 OR/AND word2" << endl;
             
             break;
         }
@@ -157,6 +177,7 @@ int main()
         //cout << "You are searching for: " << search_term << endl;
         //search for book
         cout << "Please select the book you are looking for: \n";
+
 
      
         cout << "Give us another book\n";
