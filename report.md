@@ -75,6 +75,7 @@ Overall: 50% 50% contribution
   - [AND](https://en.cppreference.com/w/cpp/algorithm/set_intersection)
   - [OR](https://en.cppreference.com/w/cpp/algorithm/set_union)
   - [NOT](https://en.cppreference.com/w/cpp/algorithm/set_difference#Version_1)
+- [Watch Garth Marenghi's Darkplace](https://www.channel4.com/programmes/garth-marenghis-darkplace)
 ### AI Usage Explanations
 We used chatgpt to generate the books we used for indexing. 
 We used chat gpt for debugging code
