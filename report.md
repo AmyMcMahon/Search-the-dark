@@ -16,9 +16,9 @@ Overall: 50% 50% contribution
 | Make Files | Dervla | 100% |
 | Map | Amy | 100% |
 | Indexer | Amy | 100% |
-| Vector | Amy and Dervla | 60% 40% |
+| Vector | Amy and Dervla | 70% 30% |
 | Quicksort | Amy and Dervla | 60% 40%|
-| Report | Amy and Dervla | 80% 20% |
+| Report | Amy and Dervla |90% 10% |
 
 ## Git Commits
 | Name | Commits | LoC |
