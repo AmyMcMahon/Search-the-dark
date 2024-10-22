@@ -17,12 +17,10 @@ void Triey::populateTriey(Vectory<trieData> words){
         }
         current->endofWord = true;
         //add implementation for popularity
-        current->popularity = 0;
+        current->popularity = words[j].count;
     }
 }
 
-//needs to return top 5 words that match input
-//pointer to array
 Vectory<string> Triey::search(string input){
     Vectory<string> top_matches;
     Nodey* current = root;
@@ -48,10 +46,12 @@ Vectory<string> Triey::search(string input){
 
 Vectory<string> Triey::rank(Vectory<pair<string, int> >& all_matches) {
     //make better sorting
+
     sort(all_matches.begin(), all_matches.end(), [](const pair<string, int>& a, const pair<string, int>& b) {
         return a.second > b.second;  // Sort by popularity, highest first
     });
     Vectory<string> top_matches;
+
     for (int i = 0; i < min(5, (int)all_matches.size()); i++) {
         top_matches.push_back(all_matches[i].first);
     }
@@ -88,7 +88,7 @@ bool Triey::lookForWord(string word){
 void Triey::print(Nodey* node, string prefix) const
 {
     if (node->endofWord) {
-        cout << prefix << endl;
+        cout << prefix << ", pop:" << node->popularity << endl;
     }
     for (int i = 0; i < 26; i++) {
         if (node->childrens[i]) {
