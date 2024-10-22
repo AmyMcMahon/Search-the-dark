@@ -67,6 +67,9 @@ Overall: 50% 50% contribution
 ## References
 - [Trie Data Strucuture](https://www.geeksforgeeks.org/trie-data-structure-in-cpp/)
 - [Auto-Complete Trie](https://www.geeksforgeeks.org/auto-complete-feature-using-trie/)
+- [Inverted Index](https://www.geeksforgeeks.org/inverted-index/)
+- [Map](https://medium.com/@abhishekjr/c-program-to-implement-map-class-2c5138165452)
+- [Vector](https://www.geeksforgeeks.org/how-to-implement-our-own-vector-class-in-c/)
 - Syntax Functions
   - [AND](https://en.cppreference.com/w/cpp/algorithm/set_intersection)
   - [OR](https://en.cppreference.com/w/cpp/algorithm/set_union)
