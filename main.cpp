@@ -96,7 +96,9 @@ int main()
 
     while (searchStr != "exit") {
         searchStr = "";
+  
         getline(cin, searchStr);
+
         if (searchStr == "exit"){
             break;
         }
@@ -117,7 +119,6 @@ int main()
             Vectory<Result> books = idx.getBooks(search_term);
             string bookPath = inputy.chooseBook(books);
             cout << "You have selected: " << bookPath << endl;
-
 
         }else if (words.size() == 2) {
             if (words[0] == "NOT") {
@@ -175,12 +176,10 @@ int main()
         //string books[10] = trie.search(searchStr);
         //string search_term = autocomplete(results);
         //cout << "You are searching for: " << search_term << endl;
-        //search for book
-        cout << "Please select the book you are looking for: \n";
-
-
-     
-        cout << "Give us another book\n";
+        //search for book 
+        cout << "Give us another book (or use exit to quit)\n";
+        cin.clear();
+        cin.ignore(INT_MAX, '\n');
     }
     return 0; 
 }
