@@ -24,7 +24,11 @@ void Indexy::addFiley(const std::string &name, Mappy &index)
             }
         }
         // Insert the word into the index with the document ID
-        index.addWord(word.c_str(), name.c_str());
+        if (std::all_of(word.begin(), word.end(), [](char c)
+                        { return std::isalpha(c); }))
+        {
+            index.addWord(word.c_str(), name.c_str());
+        }
     }
     file.close();
 
