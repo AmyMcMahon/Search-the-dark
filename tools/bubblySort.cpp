@@ -1,28 +1,29 @@
 // lol its quicksort
 #include "bubblySort.h"
+#include <algorithm>
 
-int partition(vector<sortData> &vec, int low, int high)
+int bubblySort::partition(Vectory<DocCount> &vec, int low, int high)
 {
 
-    int pivot = vec.count[high];
+    int pivot = vec[high].count;
     int i = (low - 1);
 
     for (int j = low; j <= high - 1; j++)
     {
 
-        if (vec.count[j] <= pivot)
+        if (vec[j].count >= pivot)
         {
             i++;
-            swap(vec[i], vec[j]);
+            std::swap(vec[i], vec[j]);
         }
     }
 
-    swap(vec[i + 1], vec[high]);
+    std::swap(vec[i + 1], vec[high]);
 
     return (i + 1);
 }
 
-void quickSort(vector<sortData> &vec, int low, int high)
+void bubblySort::quickSort(Vectory<DocCount> &vec, int low, int high)
 {
 
     if (low < high)

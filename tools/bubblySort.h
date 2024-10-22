@@ -3,14 +3,13 @@
 #define BUBBLYSORT_H
 
 #include "../structures/vectory.h"
+#include "../structures/mappy.h"
 
-struct sortData
+class bubblySort
 {
-    std::string word;
-    int count;
+public:
+    int partition(Vectory<DocCount> &vec, int low, int high);
+    void quickSort(Vectory<DocCount> &vec, int low, int high);
 };
-
-int partition(Vectory<sortData> &vec, int low, int high);
-void quickSort(Vectory<sortData> &vec, int low, int high);
 
 #endif

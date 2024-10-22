@@ -1,5 +1,5 @@
-#ifndef MAPPY_H  
-#define MAPPY_H  
+#ifndef MAPPY_H
+#define MAPPY_H
 #include <iostream>
 #include "vectory.h"
 using namespace std;
@@ -38,10 +38,10 @@ public:
 
     Mappy *remove(const char *word, const std::string &docName);
     Mappy *removeNode(Mappy *node);
-  
+
     // Insert or update the count for a word
     Mappy *insert(const char *first, const std::string &docName);
-    Mappy() : root(nullptr){};
+    Mappy() : root(nullptr) {};
 
     void addWord(const char *word, std::string docName);
     void removeWord(const char *word, std::string docName);

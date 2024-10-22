@@ -10,6 +10,7 @@
 #include <cctype>
 #include "../structures/mappy.h"
 #include "../structures/vectory.h"
+#include "./bubblySort.h"
 
 namespace fs = std::filesystem;
 
@@ -34,11 +35,11 @@ public:
     void removeFile(const std::string &name, Mappy &index);
     void toCsv(Mappy &index);
     void createIndex();
-    Vectory<Result> getBooks(const std::string &searchStr);
+    Vectory<Result> getBooks(std::string &searchStr);
     Vectory<trieData> readFileTrie(char word);
 
 private:
-    Vectory<Result> sortResultsByRelevance(const Vectory<DocCount> &books);
+    Vectory<Result> sortResultsByRelevance(Vectory<DocCount> &books);
     void collectData(Mappy *node);
 };
 
