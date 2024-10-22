@@ -27,21 +27,27 @@
 **Note:** Amy's github is broken
 
 ## Analysis
-- ### Map
-  - Big O Notation
-  - Justification for design decisions
-- ### Vector
-  - Big O Notation
-  - Justification for design decisions
-- ### Trie
-  - Big O Notation
-  - Justification for design decisions
-- ### Index
-  - Big O Notation
-  - Justification for design decisions
 - ### Quicksort
-  - Big O Notation
+  - ##### Big O Notation
+      - O(n) auxillary case due to recursive call stack
+  - ##### Justification for design decisions
+      - divide-and-conquer algorithm with a low overhead
+- ### Vector
+  - ##### Big O Notation
+  - ##### Justification for design decisions
+- ### Trie
+  - ##### Big O Notation
   - Justification for design decisions
+- ### Inverted Index
+  - ##### Big O Notation
+  - ##### Justification for design decisions
+- ### Map (using AVL tree)
+  - ##### Big O Notation
+      - Balancing  = O(log n)
+      - Insert = O(log n)
+      - Delete = O(log n)
+  - ##### Justification for design decisions
+      -  The tree structure ensures that operations like insertion, deletion, and searching take O(log n) time. By balancing the tree after each modification, the implementation avoids the worst-case O(n) time complexity that can occur in unbalanced binary trees. Our map often involves frequent insertion of new keys and modification of existing ones as the files are read in. AVL trees handle these dynamic updates efficiently by automatically balancing the tree through rotations 
 
 
 ## References
