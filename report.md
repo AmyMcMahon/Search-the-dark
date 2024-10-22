@@ -10,8 +10,10 @@
 | Feaure | Contributior | Percentage |
 | --- | --- | ---|
 | Indexer | Amy | 100% |
-| Console and Input | Dervla | 100% |
+| Console | Dervla | 100% |
+| Search Syntax | Dervla | 100% |
 | Trie | Dervla | 100% |
+| Make Files | Dervla | 100% |
 | Map | Amy | 100% |
 | Vector | Amy and Dervla | 60% 40% |
 | Quicksort | Amy and Dervla | 60% 40%|
