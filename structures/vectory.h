@@ -30,6 +30,7 @@ public:
     int search(const T &value) const;
 };
 
+// Constructor
 template <typename T>
 Vectory<T>::Vectory()
 {
@@ -38,12 +39,14 @@ Vectory<T>::Vectory()
     current = 0;
 }
 
+// Destructor
 template <typename T>
 Vectory<T>::~Vectory()
 {
     delete[] arry;
 }
 
+// Method to add elements to the array - if the array is full, double the size
 template <typename T>
 void Vectory<T>::push_back(T data)
 {
@@ -62,6 +65,7 @@ void Vectory<T>::push_back(T data)
     current++;
 }
 
+// Method to remove an element from the array
 template <typename T>
 void Vectory<T>::erase(int index)
 {
@@ -76,18 +80,21 @@ void Vectory<T>::erase(int index)
     current--;
 }
 
+// Method to return the size of the array
 template <typename T>
 int Vectory<T>::size() const
 {
     return current;
 }
 
+// Method to check if the array is empty
 template <typename T>
 bool Vectory<T>::empty()
 {
     return size() == 0;
 }
 
+// Overloaded [] operator to access elements in the array
 template <typename T>
 T &Vectory<T>::operator[](size_t index)
 {
@@ -98,6 +105,7 @@ T &Vectory<T>::operator[](size_t index)
     return arry[index];
 }
 
+// Overloaded [] operator to access elements in the array - const
 template <typename T>
 const T &Vectory<T>::operator[](size_t index) const
 {
@@ -108,23 +116,25 @@ const T &Vectory<T>::operator[](size_t index) const
     return arry[index];
 }
 
+// Method to return a pointer to the first/last element in the array
 template <typename T>
 T *Vectory<T>::begin() { return arry; }
 template <typename T>
 T *Vectory<T>::end() { return arry + current; }
 
+// Method to return a pointer to the first/last element in the array - const
 template <typename T>
 T *Vectory<T>::begin() const
 {
     return arry;
 }
-
 template <typename T>
 T *Vectory<T>::end() const
 {
     return arry + current;
 }
 
+// Move constructor
 template <typename T>
 Vectory<T>::Vectory(Vectory &&other) noexcept
     : arry(other.arry), cappy(other.cappy), current(other.current)
@@ -139,12 +149,12 @@ template <typename T>
 Vectory<T> &Vectory<T>::operator=(Vectory &&other) noexcept
 {
     if (this != &other)
-    {                  // Self-assignment check
-        delete[] arry; // Free existing resource
+    {
+        delete[] arry;
         arry = other.arry;
         cappy = other.cappy;
         current = other.current;
-        other.arry = nullptr; // Leave other in a valid state
+        other.arry = nullptr;
         other.cappy = 0;
         other.current = 0;
     }
@@ -167,8 +177,8 @@ template <typename T>
 Vectory<T> &Vectory<T>::operator=(const Vectory &other)
 {
     if (this != &other)
-    {                  // Self-assignment check
-        delete[] arry; // Free existing memory
+    {
+        delete[] arry;
 
         // Allocate new memory and copy
         arry = new T[other.cappy];

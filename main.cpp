@@ -96,6 +96,7 @@ int main()
 
     Vectory<trieData> words_index;
 
+    // populate trie with all words from all books
     while (searchStr != "exit")
     {
         searchStr = "";
@@ -127,6 +128,7 @@ int main()
         }
         else if (words.size() == 2)
         {
+            // run search for NOT
             if (words[0] == "NOT")
             {
                 words_index = idx.readFileTrie(words[1][0]);
@@ -151,16 +153,19 @@ int main()
         }
         else if (words.size() == 3)
         {
+            // run search for AND or OR
             if (words[1] == "AND")
             {
+                // create trie for word 1
                 words_index = idx.readFileTrie(words[0][0]);
                 bookTriey.populateTriey(words_index);
                 bool results_and1 = bookTriey.lookForWord(words[0]);
-
+                // create trie for word 2
                 words_index = idx.readFileTrie(words[2][0]);
                 bookTriey.populateTriey(words_index);
                 bool results_and2 = bookTriey.lookForWord(words[2]);
 
+                // if both words are found
                 if (results_and1 && results_and2)
                 {
                     cout << "Both words found\n";
@@ -178,14 +183,16 @@ int main()
             }
             else if (words[1] == "OR")
             {
+                // create trie for word 1
                 words_index = idx.readFileTrie(words[0][0]);
                 bookTriey.populateTriey(words_index);
                 bool results_or1 = bookTriey.lookForWord(words[0]);
-
+                // create trie for word 2
                 words_index = idx.readFileTrie(words[2][0]);
                 bookTriey.populateTriey(words_index);
                 bool results_or2 = bookTriey.lookForWord(words[2]);
 
+                // if both words are found
                 if (results_or1 && results_or2)
                 {
                     cout << "Both words found\n";

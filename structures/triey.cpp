@@ -5,6 +5,7 @@ Triey::Triey()
     root = new Nodey();
 }
 
+// fill triey with words and popularity count - inserted char by char
 void Triey::populateTriey(Vectory<trieData> words)
 {
     for (int j = 0; j < words.size(); j++)
@@ -23,16 +24,14 @@ void Triey::populateTriey(Vectory<trieData> words)
                 cout << "making new node" << index << endl;
                 current->childrens[index] = new Nodey();
             }
-            // cout << "here2.1: " << current->childrens[index] << endl;
             current = current->childrens[index];
-            // cout << "here3: " << current->childrens[index] << endl;
         }
         current->endofWord = true;
-        // add implementation for popularity
         current->popularity = words[j].count;
     }
 }
 
+// serches for index in triey and returns top 5 matches
 Vectory<string> Triey::search(string input)
 {
     Vectory<string> top_matches;
@@ -59,9 +58,9 @@ Vectory<string> Triey::search(string input)
     return top_matches;
 }
 
+// ranks the matches based on popularity
 Vectory<string> Triey::rank(Vectory<DocCount> &all_matches)
 {
-    // make better sorting
     bubblySort sorter;
     sorter.quickSort(all_matches, 0, all_matches.size() - 1);
     Vectory<string> top_matches;
