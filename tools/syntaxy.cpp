@@ -43,15 +43,20 @@ Vectory<Result> Syntaxy::or_search(Vectory<Result> word1, Vectory<Result> word2)
     int i = 0;
     int j = 0;
 
-
-    while (i < word1_size && j < word2_size) {
-        if (word1[i].title < word2[j].title) {
+    while (i < word1_size && j < word2_size)
+    {
+        if (word1[i].title < word2[j].title)
+        {
             results.push_back(word1[i]);
             i++;
-        } else if (word2[j].title < word1[i].title) {
+        }
+        else if (word2[j].title < word1[i].title)
+        {
             results.push_back(word2[j]);
             j++;
-        } else {
+        }
+        else
+        {
             Result temp = {word1[i].title, word1[i].filePath, word1[i].relevance + word2[j].relevance};
             results.push_back(temp);
             i++;
@@ -59,12 +64,14 @@ Vectory<Result> Syntaxy::or_search(Vectory<Result> word1, Vectory<Result> word2)
         }
     }
 
-    while (i < word1_size) {
+    while (i < word1_size)
+    {
         results.push_back(word1[i]);
         i++;
     }
 
-    while (j < word2_size) {
+    while (j < word2_size)
+    {
         results.push_back(word2[j]);
         j++;
     }
@@ -87,13 +94,15 @@ Vectory<Result> Syntaxy::not_search(Vectory<Result> word1)
 
     while (j < word2_size)
     {
-        if (!(word1[i].title == all_words[j].title)){
+        if (!(word1[i].title == all_words[j].title))
+        {
             results.push_back(all_words[j]);
             j++;
         }
         else
         {
-            if (i < word1_size-1){
+            if (i < word1_size - 1)
+            {
                 i++;
             }
             j++;
@@ -102,5 +111,4 @@ Vectory<Result> Syntaxy::not_search(Vectory<Result> word1)
 
     sorter.quickSortByCount(results, 0, results.size() - 1);
     return results;
-    
 }

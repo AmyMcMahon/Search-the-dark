@@ -136,11 +136,11 @@ Vectory<Result> Indexy::getBooks()
     std::string line;
     while (std::getline(file, line))
     {
-        #ifdef OS_Windows
+#ifdef _WIN32
         std::string title = line.substr(line.find_last_of("\\") + 1, line.find_last_of(".") - line.find_last_of("\\") - 1);
-        #else
+#else
         std::string title = line.substr(line.find_last_of("/") + 1, line.find_last_of(".") - line.find_last_of("/") - 1);
-        #endif
+#endif
         indexedBooks.push_back(Result{title, line, 0});
     }
     return indexedBooks;
@@ -154,7 +154,7 @@ Vectory<Result> Indexy::sortResultsByRelevance(Vectory<DocCount> &books)
     for (const auto &book : books)
     {
         Result result;
-#ifdef OS_Windows
+#ifdef _WIN32
         std::string title = book.docName.substr(book.docName.find_last_of("\\") + 1, book.docName.find_last_of(".") - book.docName.find_last_of("\\") - 1);
 #else
         std::string title = book.docName.substr(book.docName.find_last_of("/") + 1, book.docName.find_last_of(".") - book.docName.find_last_of("/") - 1);
