@@ -1,3 +1,6 @@
+#ifndef TRIEY_H
+#define TRIEY_H
+
 #include <iostream>
 #include <string>
 #include "vectory.h"
@@ -34,3 +37,5 @@ public:
     void print(Nodey *node, string prefix) const;
     void print() const;
 };
+
+#endif

@@ -2,19 +2,8 @@
 #define MAPPY_H
 #include <iostream>
 #include "vectory.h"
+#include "structs.h"
 using namespace std;
-
-struct DocCount
-{
-    std::string docName;
-    int count;
-};
-
-struct WordData
-{
-    int count;                   // Total count of the word
-    Vectory<DocCount> docCounts; // List of document counts
-};
 
 class Mappy
 {
