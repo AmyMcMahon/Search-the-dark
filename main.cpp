@@ -190,7 +190,6 @@ int main()
                 }
                 else
                 {
-                    cout << words[0] << ", " << results_or1 << ", " << words[2] << results_or2 << endl;
                     cout << "One or both words not found\n";
                 }
             }
@@ -208,11 +207,6 @@ int main()
             break;
         }
 
-        // vector<string> results = bookTriey.search(searchStr);
-        // string books[10] = trie.search(searchStr);
-        // string search_term = autocomplete(results);
-        // cout << "You are searching for: " << search_term << endl;
-        // search for book
         cout << "Give us another book (or use exit to quit)\n";
         cin.clear();
         cin.ignore(INT_MAX, '\n');
