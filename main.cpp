@@ -7,6 +7,7 @@ using namespace std;
 #include "tools/indexy.h"
 
 void printGarth() {
+    cout << "\u001b[32m" ;
     cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n";
     cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n";
     cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n";
@@ -72,22 +73,21 @@ void printGarth() {
     cout << "@@@@@@@%%%%%%@@@%%@@@@@@@%%%%%%%%%%@@@%%%%%%%%%%%@@@%%%%%%%%@@@@@@@@@@@@@@%%%%%@@%@@@@@@@%%%%%@@@%%%%%%%@@%%%%%@@@@@@@@\n";
     cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n";
     cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n";
+    cout << "\u001b[37m" ;
 };
 
 // Driver Code 
 int main() 
 { 
-    //printGarth();      put garth back in after testing
+    printGarth();     
     cout << "\nWelcome to Search the Dark\n";
     cout << "The one stop shop to find all Garth Marenghi's Books\n";
     cout << "Please enter the name of the book you are looking for: \n";
     //make search index
     //make trie
     string searchStr = "";
-    string books_temp[10] = {"theoeuvre", "blackfang", "catacombsofthedamned", "afterbirth", "arachnobilia", "thediaryofannefrankenstein"};
 
     Triey bookTriey = Triey();
-    bookTriey.print();
 
     Indexy idx;
     Inputy inputy = Inputy();
@@ -110,7 +110,6 @@ int main()
             //populates trie with words from file with starting letter
             words_index = idx.readFileTrie(searchStr[0]);
             bookTriey.populateTriey(words_index);
-            bookTriey.print();
             Vectory<string> results = bookTriey.search(searchStr);
             string search_term = inputy.autocomplete(results);
 
