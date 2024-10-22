@@ -77,5 +77,7 @@ Overall: 50% 50% contribution
   - [NOT](https://en.cppreference.com/w/cpp/algorithm/set_difference#Version_1)
 - [Watch Garth Marenghi's Darkplace](https://www.channel4.com/programmes/garth-marenghis-darkplace)
 ### AI Usage Explanations
-We used chatgpt to generate the books we used for indexing. 
-We used chat gpt for debugging code
+- We used chatgpt to generate the fake books we used for indexing. 
+- We used chat gpt for debugging code for things including syntax errors.
+- We also used ChatGpt to create the basic structure of the Make files
+- Used CoPilot for debugging print statements that have since been deleted
