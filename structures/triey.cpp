@@ -9,24 +9,32 @@ void Triey::populateTriey(Vectory<trieData> words)
 {
     for (int j = 0; j < words.size(); j++)
     {
+        cout << words.size() << endl;
+        cout << j << endl;
         string word = words[j].word;
+        cout << "here: " << word << endl;
         Nodey *current = root;
         for (int i = 0; i < word.size(); i++)
         {
+            cout << "here2: " << word[i] << endl;
             int index = word[i] - 'a';
             if (current->childrens[index] == NULL)
             {
+                cout << "making new node" << index << endl;
                 current->childrens[index] = new Nodey();
             }
+            // cout << "here2.1: " << current->childrens[index] << endl;
             current = current->childrens[index];
+            // cout << "here3: " << current->childrens[index] << endl;
         }
         current->endofWord = true;
-        //add implementation for popularity
+        // add implementation for popularity
         current->popularity = words[j].count;
     }
 }
 
-Vectory<string> Triey::search(string input){
+Vectory<string> Triey::search(string input)
+{
     Vectory<string> top_matches;
     Nodey *current = root;
     for (char c : input)
@@ -103,7 +111,8 @@ bool Triey::lookForWord(string word)
 
 void Triey::print(Nodey *node, string prefix) const
 {
-    if (node->endofWord) {
+    if (node->endofWord)
+    {
         cout << prefix << ", pop:" << node->popularity << endl;
     }
     for (int i = 0; i < 26; i++)

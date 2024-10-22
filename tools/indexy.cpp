@@ -1,6 +1,5 @@
 #include "indexy.h"
 
-
 Indexy::Indexy() {};
 
 void Indexy::addFiley(const std::string &name, Mappy &index)
@@ -121,11 +120,11 @@ Vectory<Result> Indexy::sortResultsByRelevance(Vectory<DocCount> &books)
     for (const auto &book : books)
     {
         Result result;
-        #ifdef OS_Windows
-         std::string title = book.docName.substr(book.docName.find_last_of("\\") + 1, book.docName.find_last_of(".") - book.docName.find_last_of("\\") - 1);
-        #else
-         std::string title = book.docName.substr(book.docName.find_last_of("/") + 1, book.docName.find_last_of(".") - book.docName.find_last_of("/") - 1);
-        #endif
+#ifdef OS_Windows
+        std::string title = book.docName.substr(book.docName.find_last_of("\\") + 1, book.docName.find_last_of(".") - book.docName.find_last_of("\\") - 1);
+#else
+        std::string title = book.docName.substr(book.docName.find_last_of("/") + 1, book.docName.find_last_of(".") - book.docName.find_last_of("/") - 1);
+#endif
         result.title = title; // Can modify to get actual title if needed
         result.relevance = book.count;
         result.filePath = book.docName;
