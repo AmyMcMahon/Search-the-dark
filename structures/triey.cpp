@@ -64,8 +64,6 @@ Vectory<string> Triey::rank(Vectory<DocCount> &all_matches)
 
 void Triey::lookForWords(Nodey *current, string input, Vectory<DocCount> &all_matches)
 {
-    // to make into vector or smt (linked list??)
-    // cout << "looking for : " << current << endl;
     if (current->endofWord == true)
     {
         DocCount doc;

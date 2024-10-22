@@ -50,6 +50,11 @@ Vectory<string> Inputy::break_input(string input)
 // Method to choose a book from a list of results
 string Inputy::chooseBook(Vectory<Result> books)
 {
+    if (books.empty())
+    {
+        cout << "No books found\n";
+        return "";
+    }
     cout << "Choose a book: \n";
     cout << "Results: " << books.size() << endl;
     if (books.size() > 10)
