@@ -8,6 +8,7 @@
 
 ## Contributions
 | Feaure | Contributior | Percentage |
+| --- | --- | ---|
 | Indexer | Amy | 100% |
 | Console and Input | Dervla | 100% |
 | Trie | Dervla | 100% |
