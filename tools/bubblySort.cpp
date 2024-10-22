@@ -1,7 +1,7 @@
 // lol its quicksort
 #include "bubblySort.h"
 #include <algorithm>
-
+#include <cstring>
 int bubblySort::partition(Vectory<DocCount> &vec, int low, int high)
 {
     int pivot = vec[high].count;
@@ -34,7 +34,8 @@ void bubblySort::quickSort(Vectory<DocCount> &vec, int low, int high)
     }
 }
 
-int bubblySort::partitionByName(Vectory<Result> &vec, int low, int high){
+int bubblySort::partitionByName(Vectory<Result> &vec, int low, int high)
+{
     string pivot_str = vec[high].title;
     int n = pivot_str.length();
     char pivot[n + 1];
@@ -47,7 +48,7 @@ int bubblySort::partitionByName(Vectory<Result> &vec, int low, int high){
         char temp[string_lenght + 1];
         strcpy(temp, vec[j].title.c_str());
 
-        if (strcmp(temp,pivot) < 0)
+        if (strcmp(temp, pivot) < 0)
         {
             i++;
             std::swap(vec[i], vec[j]);
@@ -58,7 +59,8 @@ int bubblySort::partitionByName(Vectory<Result> &vec, int low, int high){
 
     return (i + 1);
 };
-void bubblySort::quickSortByCount(Vectory<Result> &vec, int low, int high){
+void bubblySort::quickSortByCount(Vectory<Result> &vec, int low, int high)
+{
     if (low < high)
     {
         int pi = partitionByCount(vec, low, high);
@@ -88,7 +90,8 @@ int bubblySort::partitionByCount(Vectory<Result> &vec, int low, int high)
     return (i + 1);
 };
 
-void bubblySort::quickSortByName(Vectory<Result> &vec, int low, int high){
+void bubblySort::quickSortByName(Vectory<Result> &vec, int low, int high)
+{
     if (low < high)
     {
         int pi = partitionByName(vec, low, high);
