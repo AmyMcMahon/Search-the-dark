@@ -52,7 +52,11 @@ string Inputy::chooseBook(Vectory<Result> books)
 {
     cout << "Choose a book: \n";
     cout << "Results: " << books.size() << endl;
-    cout << "Type 0 to see more results\n";
+    if (books.size() > 10)
+    {
+        cout << "Type 0 to see more results\n";
+    }
+
     int displays = min(10, books.size());
     for (int i = 0; i < displays; i++)
     {
@@ -62,14 +66,13 @@ string Inputy::chooseBook(Vectory<Result> books)
     int bookNum;
     cin >> bookNum;
 
-    if (bookNum == 0 and books.size() > 10)
+    if (bookNum == 0 && books.size() > 10)
     {
         for (int i = 10; i < books.size(); i++)
         {
             cout << i + 1 << ". " << books[i].title << " (relavance: " << books[i].relevance << ")\n";
         }
-
-        cout << "Choose a book: \n";
+        cout << "Please select a book number: ";
         cin >> bookNum;
     }
 

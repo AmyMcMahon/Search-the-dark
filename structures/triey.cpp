@@ -24,7 +24,6 @@ void Triey::populateTriey(Vectory<trieData> words)
         current->endofWord = true;
         current->popularity = words[j].count;
     }
-    
 }
 
 // serches for index in triey and returns top 5 matches
@@ -42,10 +41,6 @@ Vectory<string> Triey::search(string input)
         }
         current = current->childrens[index];
     }
-    // if (current->endofWord && current->childrens == nullptr){
-    //     string only_word = "word";
-    //     return only_word;
-    // }
     Vectory<DocCount> all_matches;
     lookForWords(current, input, all_matches);
     top_matches = rank(all_matches);
