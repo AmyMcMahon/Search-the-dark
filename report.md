@@ -23,8 +23,8 @@ Overall: 50% 50% contribution
 ## Git Commits
 | Name | Commits | LoC |
 | --- | --- | --- |
-| Dervla Gargan | | |
-| Amy McMahon | | |
+| Dervla Gargan | 28 | 2,804 |
+| Amy McMahon | 26 | ??? - github wasnt logged in correctly |
 
 **Note:** Amy's github is broken
 
