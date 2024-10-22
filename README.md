@@ -21,7 +21,7 @@ mkdir index
 ./indexer/indexer
 ```
 
-### To Vefify
+### To Verify
 
 The `/index` directory should now contain multple csv's for each letter.
 
