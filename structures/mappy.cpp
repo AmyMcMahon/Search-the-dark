@@ -1,5 +1,6 @@
 #include "mappy.h"
 
+// Method to create a new node
 Mappy *Mappy::create(const char *first, std::string docName)
 {
     Mappy *newNode = new Mappy();
@@ -19,11 +20,14 @@ int Mappy::depthy(Mappy *node)
         return 0;
     return node->depth;
 }
+
+// method to balance the tree
 void Mappy::balance(Mappy *node)
 {
     while (node != nullptr)
     {
         int balanceFactor = depthy(node->right) - depthy(node->left);
+        // check if tree is left heavy or right heavy
         if (balanceFactor < -1)
         {
             if (depthy(node->left->left) >= depthy(node->left->right))
@@ -48,12 +52,13 @@ void Mappy::balance(Mappy *node)
                 leftRotate(node);         // Final rotation
             }
         }
-        // Update depth
+        // Update depth and move to parent node
         node->depth = max(depthy(node->left), depthy(node->right)) + 1;
-        // Move up to the parent node
         node = node->par;
     }
 }
+
+// function to rotate right around a node
 void Mappy::rightRotate(Mappy *x)
 {
     Mappy *y = x->left;
@@ -65,7 +70,7 @@ void Mappy::rightRotate(Mappy *x)
     y->par = x->par;
     if (x->par == nullptr)
     {
-        root = y; // y becomes root
+        root = y;
     }
     else if (x == x->par->right)
     {
@@ -81,6 +86,8 @@ void Mappy::rightRotate(Mappy *x)
     x->depth = max(depthy(x->left), depthy(x->right)) + 1;
     y->depth = max(depthy(y->left), depthy(y->right)) + 1;
 }
+
+// function to rotate left around a node
 void Mappy::leftRotate(Mappy *x)
 {
     Mappy *y = x->right;
@@ -92,7 +99,7 @@ void Mappy::leftRotate(Mappy *x)
     y->par = x->par;
     if (x->par == nullptr)
     {
-        root = y; // y becomes root
+        root = y;
     }
     else if (x == x->par->left)
     {
@@ -108,6 +115,8 @@ void Mappy::leftRotate(Mappy *x)
     x->depth = max(depthy(x->left), depthy(x->right)) + 1;
     y->depth = max(depthy(y->left), depthy(y->right)) + 1;
 }
+
+// function to remove a node from the tree - used for removing books from index
 Mappy *Mappy::remove(const char *word, const std::string &docName)
 {
     Mappy *temp = root;
@@ -129,10 +138,10 @@ Mappy *Mappy::remove(const char *word, const std::string &docName)
             {
                 if (it->docName == docName)
                 {
-                    // Reduce the count of this word from this document
+                    // Reduce the overall count of this word from this document
                     temp->second.count -= it->count;
-                    // Erase the document entry
-                    int index = it - temp->second.docCounts.begin(); // Calculate the index
+                    // Erase the document entry from the vector
+                    int index = it - temp->second.docCounts.begin();
                     temp->second.docCounts.erase(index);
                     docFound = true;
                     break;
@@ -154,8 +163,10 @@ Mappy *Mappy::remove(const char *word, const std::string &docName)
         }
     }
     std::cerr << "Word not found!" << std::endl;
-    return nullptr; // Word not found
+    return nullptr;
 }
+
+// function to remove a node from the tree and rebalance
 Mappy *Mappy::removeNode(Mappy *node)
 {
     if (node->left == nullptr && node->right == nullptr)
@@ -215,7 +226,7 @@ Mappy *Mappy::removeNode(Mappy *node)
         return parent;
     }
 }
-// Insert or update the count for a word
+// Insert a new word or update the count for a word
 Mappy *Mappy::insert(const char *first, const std::string &docName)
 {
     Mappy *newNode = create(first, docName);
@@ -254,7 +265,7 @@ Mappy *Mappy::insert(const char *first, const std::string &docName)
             {
                 temp->second.docCounts.push_back({docName, 1});
             }
-            delete newNode; // Free allocated memory for newNode
+            delete newNode;
             return temp;
         }
     }
@@ -272,11 +283,12 @@ Mappy *Mappy::insert(const char *first, const std::string &docName)
     return newNode;
 }
 
+// Method to add a word to the index
 void Mappy::addWord(const char *word, std::string docName)
 {
     insert(word, docName);
 }
-
+// Method to remove a word from the index
 void Mappy::removeWord(const char *word, std::string docName)
 {
     remove(word, docName);
