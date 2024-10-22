@@ -28,6 +28,11 @@
 
 ## Analysis
 - Big O Notation
+- ### Map
+- ### Vector
+- ### Trie
+- ### Index
+- ### Quicksort
 - Justification for design decisions
 
 ## References
