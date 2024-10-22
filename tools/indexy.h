@@ -23,6 +23,7 @@ public:
     void removeFile(const std::string &name, Mappy &index);
     void toCsv(Mappy &index);
     Vectory<Result> getBooks(std::string &searchStr);
+    Vectory<Result> getBooksName();
     Vectory<trieData> readFileTrie(char word);
     
 private:

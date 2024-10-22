@@ -29,6 +29,7 @@ void Triey::populateTriey(Vectory<trieData> words)
         current->endofWord = true;
         current->popularity = words[j].count;
     }
+    
 }
 
 // serches for index in triey and returns top 5 matches

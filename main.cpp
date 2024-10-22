@@ -133,15 +133,17 @@ int main()
             {
                 words_index = idx.readFileTrie(words[1][0]);
                 bookTriey.populateTriey(words_index);
-
                 bool results_not = bookTriey.lookForWord(words[1]);
-                if (results_not)
-                {
+
+                if (results_not) {
                     cout << "Word found\n";
-                    // run search for NOT
-                }
-                else
-                {
+                    Vectory<Result> word1 = idx.getBooks(words[1]);
+                    Vectory<Result> word2 = idx.getBooks();
+
+                    Vectory<Result> books = syntaxy.and_search(word1, word2);
+
+                    string bookPath = inputy.chooseBook(books);
+                }else{
                     cout << "Word not found\n";
                 }
             }
@@ -169,9 +171,9 @@ int main()
                 if (results_and1 && results_and2)
                 {
                     cout << "Both words found\n";
-
                     Vectory<Result> word1 = idx.getBooks(words[0]);
                     Vectory<Result> word2 = idx.getBooks(words[2]);
+
                     Vectory<Result> books = syntaxy.and_search(word1, word2);
 
                     string bookPath = inputy.chooseBook(books);
@@ -198,16 +200,6 @@ int main()
                     cout << "Both words found\n";
                     Vectory<Result> word1 = idx.getBooks(words[0]);
                     Vectory<Result> word2 = idx.getBooks(words[2]);
-
-                    for (int i = 0; i < word1.size(); i++)
-                    {
-                        cout << word1[i].title << endl;
-                    }
-
-                    for (int i = 0; i < word2.size(); i++)
-                    {
-                        cout << word2[i].title << endl;
-                    }
 
                     Vectory<Result> books = syntaxy.or_search(word1, word2);
 

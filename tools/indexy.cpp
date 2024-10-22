@@ -121,6 +121,12 @@ Vectory<Result> Indexy::getBooks(std::string &searchStr)
     return sortResultsByRelevance(books);
 }
 
+Vectory<Result> Indexy::getBooksName()
+{
+    
+    return Vectory<Result>();
+}
+
 // Method to sort the results by relevance - no of occurances
 Vectory<Result> Indexy::sortResultsByRelevance(Vectory<DocCount> &books)
 {
