@@ -27,13 +27,22 @@
 **Note:** Amy's github is broken
 
 ## Analysis
-- Big O Notation
 - ### Map
+  - Big O Notation
+  - Justification for design decisions
 - ### Vector
+  - Big O Notation
+  - Justification for design decisions
 - ### Trie
+  - Big O Notation
+  - Justification for design decisions
 - ### Index
+  - Big O Notation
+  - Justification for design decisions
 - ### Quicksort
-- Justification for design decisions
+  - Big O Notation
+  - Justification for design decisions
+
 
 ## References
 - Sources
