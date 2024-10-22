@@ -2,6 +2,8 @@
 #include <string>
 #include "vectory.h"
 #include "../tools/indexy.h"
+#include "../tools/bubblySort.h"
+#include "mappy.h"
 #include <algorithm>
 using namespace std;
 
@@ -26,8 +28,8 @@ public:
     Triey();
     void populateTriey(Vectory<trieData> words);
     Vectory<string> search(string input);
-    Vectory<string> rank(Vectory<pair<string, int>> &all_matches);
-    void lookForWords(Nodey *current, string input, Vectory<pair<string, int>> &all_matches);
+    Vectory<string> rank(Vectory<DocCount> &all_matches);
+    void lookForWords(Nodey *current, string input, Vectory<DocCount> &all_matches);
     bool lookForWord(string word);
     void print(Nodey *node, string prefix) const;
     void print() const;
