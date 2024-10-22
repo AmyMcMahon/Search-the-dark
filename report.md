@@ -7,6 +7,7 @@
 | Amy McMahon | 22346619 |
 
 ## Contributions
+Overall: 50% 50% contribution
 | Feaure | Contributior | Percentage |
 | --- | --- | ---|
 | Console | Dervla | 100% |
@@ -17,6 +18,7 @@
 | Indexer | Amy | 100% |
 | Vector | Amy and Dervla | 60% 40% |
 | Quicksort | Amy and Dervla | 60% 40%|
+| Report | Amy and Dervla | 80% 20% |
 
 ## Git Commits
 | Name | Commits | LoC |
@@ -34,13 +36,23 @@
       - divide-and-conquer algorithm with a low overhead. It is easy to avoid the worst case time complexity O(n^2) by selecting an appropriate pivot value
 - ### Vector
   - ##### Big O Notation
+      - Insert = O(1) - (O(n) when resizing needed)
+      - Erase = O(n)
+      - Search = 0(n)
   - ##### Justification for design decisions
+      - Insertion into our data structure was important and vector has O(1) compared to other structures. Vector provides an optimal balance of time complexity, memory management, and simplicity.
 - ### Trie
   - ##### Big O Notation
-  - Justification for design decisions
+      - Insert = O(m *n) (m=num of words, n = num of chars)
+      - Search = O(m *n) (m=num of words, n = num of chars)
+  - ##### Justification for design decisions
 - ### Inverted Index
   - ##### Big O Notation
+    - Adding files = O(m * n) (m=num of words)
+    - Deleting files = O(m * n) (m=num of words)
+    - read in Index  = O(n)
   - ##### Justification for design decisions
+      - Inverted Index is a data structure used in information retrieval systems to efficiently retrieve documents or web pages containing a specific term or set of terms. This is why we decided to use it for our project. By indexing every term in every document, the index can quickly identify all documents that contain a given search term or phrase, significantly reducing search time.
 - ### Map (using AVL tree)
   - ##### Big O Notation
       - Balancing  = O(log n)
