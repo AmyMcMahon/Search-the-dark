@@ -119,8 +119,27 @@ Vectory<Result> Indexy::getBooks(std::string &searchStr)
 
 Vectory<Result> Indexy::getBooksName()
 {
-    
-    return Vectory<Result>();
+    Vectory<Result> indexedBooks;
+    std::string indexPath = "./indexer/indexedBooks.csv";
+
+    std::ifstream file(indexPath);
+    if (!file.is_open())
+    {
+        std::cerr << "Error opening the file!" << std::endl;
+        std::cout << "Current working directory: " << std::filesystem::current_path() << std::endl;
+        return indexedBooks;
+    }
+    std::string line;
+    while (std::getline(file, line))
+    {
+        #ifdef OS_Windows
+        std::string title = line.substr(line.find_last_of("\\") + 1, line.find_last_of(".") - line.find_last_of("\\") - 1);
+        #else
+        std::string title = line.substr(line.find_last_of("/") + 1, line.find_last_of(".") - line.find_last_of("/") - 1);
+        #endif
+        indexedBooks.push_back(Result{title, line, 0});
+    }
+    return indexedBooks;
 }
 
 Vectory<Result> Indexy::sortResultsByRelevance(Vectory<DocCount> &books)

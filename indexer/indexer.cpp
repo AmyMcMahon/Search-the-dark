@@ -4,7 +4,6 @@
 
 namespace fs = std::filesystem;
 
-// function to create index of books
 int main()
 {
     Indexy idx;
@@ -12,7 +11,6 @@ int main()
     Vectory<std::string> indexedBooks;
     std::string indexPath = "./indexer/indexedBooks.csv";
 
-    // Reads in already indexed books to avoid having to rebuild the index when adding new books
     std::ifstream file(indexPath);
     if (!file.is_open())
     {

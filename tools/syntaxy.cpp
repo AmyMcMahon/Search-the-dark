@@ -80,8 +80,6 @@ Vectory<Result> Syntaxy::not_search(Vectory<Result> word1)
 {
     sorter.quickSortByName(word1, 0, word1.size() - 1);
     Vectory<Result> all_words = idx.getBooksName();
-    //do thing
-    sorter.quickSortByName(all_words, 0, all_words.size() - 1);
     Vectory<Result> d_first;
     int word1_size = word1.size();
     int word2_size = all_words.size();
@@ -90,17 +88,15 @@ Vectory<Result> Syntaxy::not_search(Vectory<Result> word1)
 
     while (j < word2_size)
     {
-        if (word1[i].title < all_words[j].title){
+        if (!(word1[i].title == all_words[j].title)){
             d_first.push_back(all_words[j]);
             j++;
-        }else if (word1[i].title > all_words[j].title){
-            i++;
         }
         else
         {
-            if (i < word1_size){
+            if (i < word1_size-1){
                 i++;
-        }
+            }
             j++;
         }
     }

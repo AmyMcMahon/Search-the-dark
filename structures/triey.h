@@ -19,7 +19,6 @@ public:
 
     Nodey()
     {
-        cout << "Nodey constructor\n";
         endofWord = false;
         for (int i = 0; i < 26; i++)
         {
