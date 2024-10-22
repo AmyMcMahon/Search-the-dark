@@ -2,6 +2,8 @@
 #include "bubblySort.h"
 #include <algorithm>
 #include <cstring>
+
+// partition for quicksort using the count of each word - take in docCount vector
 int bubblySort::partition(Vectory<DocCount> &vec, int low, int high)
 {
     int pivot = vec[high].count;
@@ -22,6 +24,7 @@ int bubblySort::partition(Vectory<DocCount> &vec, int low, int high)
     return (i + 1);
 }
 
+// quicksort for the count of each word - take in docCount vector
 void bubblySort::quickSort(Vectory<DocCount> &vec, int low, int high)
 {
     if (low < high)
@@ -34,6 +37,7 @@ void bubblySort::quickSort(Vectory<DocCount> &vec, int low, int high)
     }
 }
 
+// partition for quicksort using the name of each word - take in result vector
 int bubblySort::partitionByName(Vectory<Result> &vec, int low, int high)
 {
     string pivot_str = vec[high].title;
@@ -59,6 +63,8 @@ int bubblySort::partitionByName(Vectory<Result> &vec, int low, int high)
 
     return (i + 1);
 };
+
+// quicksort for the name of each word - take in result vector
 void bubblySort::quickSortByCount(Vectory<Result> &vec, int low, int high)
 {
     if (low < high)
@@ -70,6 +76,7 @@ void bubblySort::quickSortByCount(Vectory<Result> &vec, int low, int high)
     }
 }
 
+// partition for quicksort using the count of each word - take in result vector
 int bubblySort::partitionByCount(Vectory<Result> &vec, int low, int high)
 {
     int pivot = vec[high].relevance;
@@ -90,6 +97,7 @@ int bubblySort::partitionByCount(Vectory<Result> &vec, int low, int high)
     return (i + 1);
 };
 
+// quicksort for the count of each word - take in result vector
 void bubblySort::quickSortByName(Vectory<Result> &vec, int low, int high)
 {
     if (low < high)

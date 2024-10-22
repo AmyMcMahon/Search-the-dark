@@ -1,10 +1,11 @@
 #include "syntaxy.h"
 
-Syntaxy::Syntaxy(){};
+Syntaxy::Syntaxy() {};
 
+// Method to search for the intersection of two words
 Vectory<Result> Syntaxy::and_search(Vectory<Result> &word1, Vectory<Result> &word2)
 {
-    
+
     sorter.quickSortByName(word1, 0, word1.size() - 1);
     sorter.quickSortByName(word2, 0, word2.size() - 1);
 
@@ -21,9 +22,10 @@ Vectory<Result> Syntaxy::and_search(Vectory<Result> &word1, Vectory<Result> &wor
             i++;
         else
         {
-            if (!(word2[j].title < word1[i].title)){
+            if (!(word2[j].title < word1[i].title))
+            {
                 Result temp = {word1[i].title, word1[i].filePath, word1[i].relevance + word2[j].relevance};
-                d_first.push_back(temp); 
+                d_first.push_back(temp);
             }
             j++;
         }
@@ -33,6 +35,7 @@ Vectory<Result> Syntaxy::and_search(Vectory<Result> &word1, Vectory<Result> &wor
     return d_first;
 }
 
+// Method to search for the union of two words
 Vectory<Result> Syntaxy::or_search(Vectory<Result> word1, Vectory<Result> word2)
 {
     sorter.quickSortByName(word1, 0, word1.size() - 1);
@@ -44,6 +47,7 @@ Vectory<Result> Syntaxy::or_search(Vectory<Result> word1, Vectory<Result> word2)
     cout << "Word 2 - " << word2_size << endl;
     int i = 0;
     int j = 0;
+
 
     while (i < word1_size && j < word2_size) {
         if (word1[i].title < word2[j].title) {
@@ -76,6 +80,7 @@ Vectory<Result> Syntaxy::or_search(Vectory<Result> word1, Vectory<Result> word2)
     return d_first;
 }
 
+// Method to search for the difference of two words
 Vectory<Result> Syntaxy::not_search(Vectory<Result> word1)
 {
     sorter.quickSortByName(word1, 0, word1.size() - 1);

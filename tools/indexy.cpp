@@ -2,6 +2,7 @@
 
 Indexy::Indexy() {};
 
+// Method to add words in a file to the index
 void Indexy::addFiley(const std::string &name, Mappy &index)
 {
     std::ifstream file(name);
@@ -43,6 +44,7 @@ void Indexy::addFiley(const std::string &name, Mappy &index)
     indexedBooksFile.close();
 }
 
+// Method to remove words in a file from the index
 void Indexy::removeFile(const std::string &name, Mappy &index)
 {
     std::ifstream file(name);
@@ -75,9 +77,10 @@ void Indexy::toCsv(Mappy &index)
     collectData(index.root); // Collect data from the index and write to CSV
 }
 
+// Method to get books from the index
 Vectory<Result> Indexy::getBooks(std::string &searchStr)
 {
-    // Get the first letter of the search string to open CSV
+    // Get the first letter of the search string to open relevant CSV
     char firstLetter = tolower(searchStr[0]);
     std::string fileName = "./index/" + std::string(1, firstLetter) + ".csv";
     std::ifstream file(fileName);
@@ -88,6 +91,7 @@ Vectory<Result> Indexy::getBooks(std::string &searchStr)
     }
     Vectory<DocCount> books;
     std::string line;
+
     // Read the file and find word and documents
     while (std::getline(file, line))
     {
@@ -123,6 +127,7 @@ Vectory<Result> Indexy::getBooksName()
     return Vectory<Result>();
 }
 
+// Method to sort the results by relevance - no of occurances
 Vectory<Result> Indexy::sortResultsByRelevance(Vectory<DocCount> &books)
 {
     Vectory<Result> results;
@@ -135,7 +140,7 @@ Vectory<Result> Indexy::sortResultsByRelevance(Vectory<DocCount> &books)
 #else
         std::string title = book.docName.substr(book.docName.find_last_of("/") + 1, book.docName.find_last_of(".") - book.docName.find_last_of("/") - 1);
 #endif
-        result.title = title; // Can modify to get actual title if needed
+        result.title = title;
         result.relevance = book.count;
         result.filePath = book.docName;
         results.push_back(result);
@@ -166,11 +171,12 @@ void Indexy::collectData(Mappy *node)
             file << docCount.docName << "," << docCount.count << "," << "\t";
         }
         file << std::endl;
-        file.close(); // Close the file after writing the data
+        file.close();
     }
     collectData(node->right);
 }
 
+// Method to read the trie data from a file
 Vectory<trieData> Indexy::readFileTrie(char word)
 {
     char firstLetter = tolower(word);
