@@ -5,6 +5,7 @@ using namespace std;
 #include "structures/vectory.h"
 #include "tools/inputy.h"
 #include "tools/indexy.h"
+#include "tools/syntaxy.h"
 
 void printGarth() {
     cout << "\u001b[32m" ;
@@ -88,9 +89,9 @@ int main()
     string searchStr = "";
 
     Triey bookTriey = Triey();
-
     Indexy idx;
     Inputy inputy = Inputy();
+    Syntaxy syntaxy = Syntaxy();
 
     Vectory<trieData> words_index;
 
@@ -147,17 +148,44 @@ int main()
 
                 if (results_and1 && results_and2) {
                     cout << "Both words found\n";
-                    //run search for AND
+
+                    Vectory<Result> word1 = idx.getBooks(words[0]);
+                    Vectory<Result> word2 = idx.getBooks(words[2]);
+                    Vectory<Result> books = syntaxy.and_search(word1, word2);
+
+                    string bookPath = inputy.chooseBook(books);
                 }else{
                     cout << "One or both words not found\n";
                 }
             }else if (words[1] == "OR") {
+                words_index = idx.readFileTrie(words[0][0]);
+                bookTriey.populateTriey(words_index);
                 bool results_or1 = bookTriey.lookForWord(words[0]);
+
+                words_index = idx.readFileTrie(words[2][0]);
+                bookTriey.populateTriey(words_index);
                 bool results_or2 = bookTriey.lookForWord(words[2]);
+
                 if (results_or1 && results_or2) {
                     cout << "Both words found\n";
-                    //run search for or
+                    Vectory<Result> word1 = idx.getBooks(words[0]);
+                    Vectory<Result> word2 = idx.getBooks(words[2]);
+
+                    for (int i = 0; i < word1.size(); i++)
+                    {
+                        cout << word1[i].title << endl;
+                    }
+
+                    for (int i = 0; i < word2.size(); i++)
+                    {
+                        cout << word2[i].title << endl;
+                    }
+
+                    Vectory<Result> books = syntaxy.or_search(word1, word2);
+
+                    string bookPath = inputy.chooseBook(books);
                 }else{
+                    cout << words[0] << ", " << results_or1 << ", " << words[2] << results_or2 << endl;
                     cout << "One or both words not found\n";
                 }
             }else{
