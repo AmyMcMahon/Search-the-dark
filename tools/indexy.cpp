@@ -27,6 +27,16 @@ void Indexy::addFiley(const std::string &name, Mappy &index)
         index.addWord(word.c_str(), name.c_str());
     }
     file.close();
+
+    // Add the file to the list of indexed books
+    std::ofstream indexedBooksFile("./indexer/indexedBooks.csv", std::ios::app);
+    if (!indexedBooksFile.is_open())
+    {
+        std::cerr << "Error opening the file!" << std::endl;
+        return;
+    }
+    indexedBooksFile << name << std::endl;
+    indexedBooksFile.close();
 }
 
 void Indexy::removeFile(const std::string &name, Mappy &index)
@@ -59,19 +69,6 @@ void Indexy::removeFile(const std::string &name, Mappy &index)
 void Indexy::toCsv(Mappy &index)
 {
     collectData(index.root); // Collect data from the index and write to CSV
-}
-
-void Indexy::createIndex()
-{
-    Mappy index;
-    std::string path = "./books";
-    // Iterate through files in the specified directory and add them to the index
-    for (const auto &entry : fs::directory_iterator(path))
-    {
-        addFiley(entry.path().string(), index);
-    }
-    // Export the index to CSV files
-    toCsv(index);
 }
 
 Vectory<Result> Indexy::getBooks(std::string &searchStr)
@@ -125,7 +122,7 @@ Vectory<Result> Indexy::sortResultsByRelevance(Vectory<DocCount> &books)
     {
         Result result;
         std::string title = book.docName.substr(book.docName.find_last_of("\\") + 1, book.docName.find_last_of(".") - book.docName.find_last_of("\\") - 1);
-        result.title = title; // Can modify to get actual title if needed
+        result.title = title;
         result.relevance = book.count;
         result.filePath = book.docName;
         results.push_back(result);
@@ -142,7 +139,7 @@ void Indexy::collectData(Mappy *node)
     if (!node->first.empty())
     {
         char firstLetter = tolower(node->first[0]);
-        std::string fileName = "../index/" + std::string(1, firstLetter) + ".csv";
+        std::string fileName = "./index/" + std::string(1, firstLetter) + ".csv";
         std::ofstream file(fileName, std::ios::app);
         if (!file.is_open())
         {

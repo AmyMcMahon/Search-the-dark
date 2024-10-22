@@ -27,6 +27,7 @@ public:
 
     Vectory(const Vectory &other);
     Vectory &operator=(const Vectory &other);
+    int search(const T &value) const;
 };
 
 template <typename T>
@@ -179,5 +180,18 @@ Vectory<T> &Vectory<T>::operator=(const Vectory &other)
         }
     }
     return *this;
+}
+
+template <typename T>
+int Vectory<T>::search(const T &value) const
+{
+    for (int i = 0; i < current; ++i)
+    {
+        if (arry[i] == value)
+        {
+            return i; // Return index if found
+        }
+    }
+    return -1; // Return -1 if not found
 }
 #endif // VECTORY_H
