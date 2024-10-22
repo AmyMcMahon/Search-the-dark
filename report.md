@@ -1,4 +1,5 @@
 # Search the Dark - Report
+We've based our searcher off Garth Marenghi's DarkPlace, a Channel 4 show we highly reccommend :) This show within a show is a parody of 80's horror television and part soap opera. Garth Marenghi is a fictional horror author making a tv show with his manager Dean. Set at Darkplace Hospital, Garth plays Dr. Dagless who always carries a gun and tries to solve supernatural mysteries.
 
 ## Group Members
 | Name | Student ID |
