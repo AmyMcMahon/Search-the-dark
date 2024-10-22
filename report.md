@@ -29,9 +29,9 @@
 ## Analysis
 - ### Quicksort
   - ##### Big O Notation
-      - O(n) auxillary case due to recursive call stack
+      - O(n log n) - On average, the pivot divides the array into two parts, but not necessarily equal.
   - ##### Justification for design decisions
-      - divide-and-conquer algorithm with a low overhead
+      - divide-and-conquer algorithm with a low overhead. It is easy to avoid the worst case time complexity O(n^2) by selecting an appropriate pivot value
 - ### Vector
   - ##### Big O Notation
   - ##### Justification for design decisions
