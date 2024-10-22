@@ -34,7 +34,6 @@ public:
     void addFiley(const std::string &name, Mappy &index);
     void removeFile(const std::string &name, Mappy &index);
     void toCsv(Mappy &index);
-    void createIndex();
     Vectory<Result> getBooks(std::string &searchStr);
     Vectory<trieData> readFileTrie(char word);
 
