@@ -155,6 +155,7 @@ int main()
                 {
                     cout << "Word found\n";
                     Vectory<Result> word1 = idx.getBooks(words[1]);
+                    //Vectory<Result> word2 = idx.getBooks();
 
                     Vectory<Result> books = syntaxy.not_search(word1);
 
