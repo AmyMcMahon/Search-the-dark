@@ -121,7 +121,7 @@ Vectory<Result> Indexy::getBooks(std::string &searchStr)
     return sortResultsByRelevance(books);
 }
 
-Vectory<Result> Indexy::getBooksName()
+Vectory<Result> Indexy::getBooks()
 {
     Vectory<Result> indexedBooks;
     std::string indexPath = "./indexer/indexedBooks.csv";

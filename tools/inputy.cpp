@@ -60,7 +60,7 @@ string Inputy::chooseBook(Vectory<Result> books)
     int displays = min(10, books.size());
     for (int i = 0; i < displays; i++)
     {
-        cout << i + 1 << ". " << books[i].title << " ( relavance: " << books[i].relevance << ")\n";
+        cout << i + 1 << ". " << books[i].title << " (relavance: " << books[i].relevance << ")\n";
     }
 
     int bookNum;
@@ -70,11 +70,13 @@ string Inputy::chooseBook(Vectory<Result> books)
     {
         for (int i = 10; i < books.size(); i++)
         {
-            cout << i + 1 << ". " << books[i].title << " ( relevance: " << books[i].relevance << ")\n";
+            cout << i + 1 << ". " << books[i].title << " (relavance: " << books[i].relevance << ")\n";
         }
         cout << "Please select a book number: ";
         cin >> bookNum;
     }
+
+    
 
     while (bookNum < 1 || bookNum >= books.size() + 1)
     {
@@ -84,6 +86,6 @@ string Inputy::chooseBook(Vectory<Result> books)
         cin.ignore(INT_MAX, '\n');
     }
 
-    cout << "You have selected: " << books[bookNum - 1].title << endl;
+    cout << "You have selected: \nTitle: " << books[bookNum - 1].title <<"\nPath: " << books[bookNum - 1].filePath<< endl;
     return books[bookNum - 1].filePath;
 }
