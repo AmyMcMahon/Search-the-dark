@@ -64,7 +64,13 @@ Overall: 50% 50% contribution
 
 
 ## References
-- Sources
+## References
+- [Trie Data Strucuture](https://www.geeksforgeeks.org/trie-data-structure-in-cpp/)
+- [Auto-Complete Trie](https://www.geeksforgeeks.org/auto-complete-feature-using-trie/)
+- Syntax Functions
+  - [AND](https://en.cppreference.com/w/cpp/algorithm/set_intersection)
+  - [OR](https://en.cppreference.com/w/cpp/algorithm/set_union)
+  - [NOT](https://en.cppreference.com/w/cpp/algorithm/set_difference#Version_1)
 ### AI Usage Explanations
 We used chatgpt to generate the books we used for indexing. 
 We used chat gpt for debugging code
