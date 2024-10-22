@@ -2,10 +2,17 @@
 
 Syntaxy::Syntaxy() {};
 
-// Method to search for the intersection of two words
+/**
+ * Sum numbers in a vector.
+ *
+ * This sum is the arithmetic sum, not some other kind of sum that only
+ * mathematicians have heard of.
+ *
+ * @param values Vectory<Result> &word1 Vectory<Result> &word
+ * @return intersection of the two vectors
+ */
 Vectory<Result> Syntaxy::and_search(Vectory<Result> &word1, Vectory<Result> &word2)
 {
-
     sorter.quickSortByName(word1, 0, word1.size() - 1);
     sorter.quickSortByName(word2, 0, word2.size() - 1);
 

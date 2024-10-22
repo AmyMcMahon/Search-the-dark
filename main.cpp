@@ -78,38 +78,30 @@ void printGarth()
     cout << "\u001b[37m";
 };
 
-// Driver Code
 int main()
 {
     printGarth();
     cout << "\nWelcome to Search the Dark\n";
     cout << "The one stop shop to find all Garth Marenghi's Books\n";
     cout << "Please enter the name of the book you are looking for: \n";
-    // make search index
-    // make trie
-    string searchStr = "";
 
+    string searchStr = "";
     Triey bookTriey = Triey();
     Indexy idx;
     Inputy inputy = Inputy();
     Syntaxy syntaxy = Syntaxy();
-
     Vectory<trieData> words_index;
 
-    // populate trie with all words from all books
     while (searchStr != "exit")
     {
         searchStr = "";
-
         getline(cin, searchStr);
-
         if (searchStr == "exit")
         {
             break;
         }
 
         Vectory<string> words = inputy.break_input(searchStr);
-        cout << "Words: " << words.size() << endl;
 
         if (words.size() == 1)
         {
@@ -124,11 +116,9 @@ int main()
 
             Vectory<Result> books = idx.getBooks(search_term);
             string bookPath = inputy.chooseBook(books);
-            cout << "You have selected: " << bookPath << endl;
         }
         else if (words.size() == 2)
         {
-            // run search for NOT
             if (words[0] == "NOT")
             {
                 words_index = idx.readFileTrie(words[1][0]);
@@ -138,8 +128,6 @@ int main()
                 if (results_not) {
                     cout << "Word found\n";
                     Vectory<Result> word1 = idx.getBooks(words[1]);
-                    //Vectory<Result> word2 = idx.getBooks();
-
                     Vectory<Result> books = syntaxy.not_search(word1);
 
                     string bookPath = inputy.chooseBook(books);
@@ -155,19 +143,16 @@ int main()
         }
         else if (words.size() == 3)
         {
-            // run search for AND or OR
             if (words[1] == "AND")
             {
-                // create trie for word 1
                 words_index = idx.readFileTrie(words[0][0]);
                 bookTriey.populateTriey(words_index);
                 bool results_and1 = bookTriey.lookForWord(words[0]);
-                // create trie for word 2
+
                 words_index = idx.readFileTrie(words[2][0]);
                 bookTriey.populateTriey(words_index);
                 bool results_and2 = bookTriey.lookForWord(words[2]);
 
-                // if both words are found
                 if (results_and1 && results_and2)
                 {
                     cout << "Both words found\n";
@@ -185,16 +170,14 @@ int main()
             }
             else if (words[1] == "OR")
             {
-                // create trie for word 1
                 words_index = idx.readFileTrie(words[0][0]);
                 bookTriey.populateTriey(words_index);
                 bool results_or1 = bookTriey.lookForWord(words[0]);
-                // create trie for word 2
+
                 words_index = idx.readFileTrie(words[2][0]);
                 bookTriey.populateTriey(words_index);
                 bool results_or2 = bookTriey.lookForWord(words[2]);
 
-                // if both words are found
                 if (results_or1 && results_or2)
                 {
                     cout << "Both words found\n";
