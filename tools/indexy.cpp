@@ -1,6 +1,6 @@
 #include "indexy.h"
 
-Indexy::Indexy(){};
+Indexy::Indexy() {};
 
 void Indexy::addFiley(const std::string &name, Mappy &index)
 {
@@ -74,7 +74,7 @@ void Indexy::createIndex()
     toCsv(index);
 }
 
-Vectory<Result> Indexy::getBooks(const std::string &searchStr)
+Vectory<Result> Indexy::getBooks(std::string &searchStr)
 {
     // Get the first letter of the search string to open CSV
     char firstLetter = tolower(searchStr[0]);
@@ -116,23 +116,20 @@ Vectory<Result> Indexy::getBooks(const std::string &searchStr)
     return sortResultsByRelevance(books);
 }
 
-Vectory<Result> Indexy::sortResultsByRelevance(const Vectory<DocCount> &books)
+Vectory<Result> Indexy::sortResultsByRelevance(Vectory<DocCount> &books)
 {
     Vectory<Result> results;
+    bubblySort sorter;
+    sorter.quickSort(books, 0, books.size() - 1);
     for (const auto &book : books)
     {
         Result result;
         std::string title = book.docName.substr(book.docName.find_last_of("\\") + 1, book.docName.find_last_of(".") - book.docName.find_last_of("\\") - 1);
         result.title = title; // Can modify to get actual title if needed
         result.relevance = book.count;
-        result.filePath = book.docName; // You might want to use the actual path or a more meaningful identifier
+        result.filePath = book.docName;
         results.push_back(result);
     }
-    // Sort by relevance (count)
-    std::sort(results.begin(), results.end(), [](const Result &a, const Result &b)
-              {
-                  return a.relevance > b.relevance; // Sort in descending order
-              });
     return results;
 }
 
