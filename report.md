@@ -46,6 +46,7 @@ Overall: 50% 50% contribution
       - Insert = O(m *n) (m=num of words, n = num of chars)
       - Search = O(m *n) (m=num of words, n = num of chars)
   - ##### Justification for design decisions
+      - The Trie structure is particularly suited for autocomplete functionality because it allows for fast prefix searches. Each character in a query can be processed sequentially, making it efficient for retrieving potential matches. The structure supports operations such as insertion, search, and deletion of keys, making it a valuable tool for info retrieval. The ranking mechanism based on popularity ensures that the most relevant results are presented first. This is important for user experience in autocomplete scenarios.
 - ### Inverted Index
   - ##### Big O Notation
     - Adding files = O(m * n) (m=num of words)
