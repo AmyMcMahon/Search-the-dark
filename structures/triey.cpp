@@ -21,9 +21,9 @@ void Triey::populateTriey(Vectory<trieData> words)
             current = current->childrens[index];
         }
         current->endofWord = true;
-        //add implementation for popularity
         current->popularity = words[j].count;
     }
+    
 }
 
 Vectory<string> Triey::search(string input){

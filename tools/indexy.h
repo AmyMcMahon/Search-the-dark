@@ -24,6 +24,7 @@ public:
     void toCsv(Mappy &index);
     void createIndex();
     Vectory<Result> getBooks(std::string &searchStr);
+    Vectory<Result> getBooksName();
     Vectory<trieData> readFileTrie(char word);
     
 private:
