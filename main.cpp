@@ -111,6 +111,22 @@ int main()
         Vectory<string> words = inputy.break_input(searchStr);
         cout << "Words: " << words.size() << endl;
 
+        for (auto word : words)
+        {
+            if (word != "AND" && word != "OR" && word != "NOT")
+            {
+                for (int i = 0, len = searchStr.size(); i < len; i++)
+                {
+                    searchStr[i] = tolower(searchStr[i]);
+                    if (ispunct(searchStr[i]))
+                    {
+                        searchStr.erase(i--, 1);
+                        len = searchStr.size();
+                    }
+                }
+            }
+        }
+
         if (words.size() == 1)
         {
             // populates trie with words from file with starting letter
@@ -135,15 +151,17 @@ int main()
                 bookTriey.populateTriey(words_index);
                 bool results_not = bookTriey.lookForWord(words[1]);
 
-                if (results_not) {
+                if (results_not)
+                {
                     cout << "Word found\n";
                     Vectory<Result> word1 = idx.getBooks(words[1]);
-                    Vectory<Result> word2 = idx.getBooks();
 
-                    Vectory<Result> books = syntaxy.and_search(word1, word2);
+                    Vectory<Result> books = syntaxy.not_search(word1);
 
                     string bookPath = inputy.chooseBook(books);
-                }else{
+                }
+                else
+                {
                     cout << "Word not found\n";
                 }
             }
@@ -230,7 +248,7 @@ int main()
         // string search_term = autocomplete(results);
         // cout << "You are searching for: " << search_term << endl;
         // search for book
-        cout << "Give us another book (or use exit to quit)\n";
+        cout << "Give us another word (or use exit to quit)\n";
         cin.clear();
         cin.ignore(INT_MAX, '\n');
     }
